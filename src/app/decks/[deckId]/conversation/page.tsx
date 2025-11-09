@@ -67,28 +67,27 @@ export default function ConversationPage() {
   const isFinished = currentIndex >= questions.length;
 
   return (
-    <div className="container relative mx-auto flex h-full max-w-2xl flex-1 flex-col items-center justify-center p-4">
-      <div className="absolute left-4 top-4 md:left-8 md:top-6">
-        <Button asChild variant="ghost">
-          <Link href="/decks">
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Voltar
-          </Link>
-        </Button>
-      </div>
-
-      <div className="flex w-full flex-col items-center">
-        <div className="mb-4 flex w-full items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <Label htmlFor="shuffle-mode">Modo:</Label>
-            <div className="flex items-center gap-2">
-              <Switch
-                id="shuffle-mode"
-                checked={isShuffled}
-                onCheckedChange={setIsShuffled}
-              />
-              <Label htmlFor="shuffle-mode">Aleatório</Label>
+    <div className="container mx-auto flex h-full max-w-2xl flex-1 flex-col items-center justify-center p-4">
+      <div className="flex w-full flex-col items-start">
+        <div className="mb-4 flex w-full flex-wrap items-center justify-between gap-4">
+          <div className="flex flex-col items-start gap-2">
+            <div className="flex items-center space-x-2">
+              <Label htmlFor="shuffle-mode">Modo:</Label>
+              <div className="flex items-center gap-2">
+                <Switch
+                  id="shuffle-mode"
+                  checked={isShuffled}
+                  onCheckedChange={setIsShuffled}
+                />
+                <Label htmlFor="shuffle-mode">Aleatório</Label>
+              </div>
             </div>
+            <Button asChild variant="ghost" className="p-0 h-auto">
+              <Link href="/decks">
+                <ArrowLeft className="mr-2 h-4 w-4" />
+                Voltar
+              </Link>
+            </Button>
           </div>
           {!isFinished && (
             <p className="text-sm text-muted-foreground">
@@ -151,7 +150,7 @@ export default function ConversationPage() {
           </motion.div>
         </AnimatePresence>
         {!isFinished && (
-          <div className="mt-6 flex items-center gap-4">
+          <div className="mt-6 flex w-full items-center justify-center gap-4">
             <Button variant="outline" onClick={handleReset}>
               <RotateCw className="mr-2 h-4 w-4" />
               Restart
