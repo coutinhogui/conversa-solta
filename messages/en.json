@@ -14,5 +14,57 @@
   },
   "DeckCard": {
     "startConversation": "Start Conversation"
+  },
+  "ConversationPage": {
+    "backButton": "Back to Decks",
+    "modeLabel": "Mode",
+    "shuffleLabel": "Shuffle",
+    "questionProgress": "Question {current} of {total}",
+    "endTitle": "You've reached the end!",
+    "endSubtitle": "Hope you had a great conversation.",
+    "startOverButton": "Start Over",
+    "nextQuestionButton": "Next Question",
+    "restartButton": "Restart"
+  },
+  "DecksPage": {
+    "title": "All Decks",
+    "subtitle": "Find the perfect set of questions for any occasion.",
+    "filterPlaceholder": "Filter by category",
+    "allCategories": "All Categories"
+  },
+  "FavoritesPage": {
+    "title": "Favorite Decks",
+    "subtitle": "Your hand-picked collection of conversation starters.",
+    "noFavoritesTitle": "No Favorites Yet",
+    "noFavoritesSubtitle": "Click the star icon on any deck to add it to your favorites for quick access."
+  },
+  "SettingsPage": {
+    "title": "Settings",
+    "subtitle": "Manage your app preferences and view information.",
+    "appearanceTitle": "Appearance",
+    "appearanceSubtitle": "Customize the look and feel of the app.",
+    "themeLabel": "Theme",
+    "pwaTitle": "PWA & Offline",
+    "pwaSubtitle": "Connectivity status and offline usage information.",
+    "connectivityLabel": "Connectivity",
+    "offlineTitle": "Offline Use",
+    "offlineSubtitle": "This app is a PWA (Progressive Web App). You can install it on your device for easy access and offline use. Deck data is synced for availability even without an internet connection."
+  },
+  "Share": {
+    "shareButton": "Share",
+    "linkCopiedTitle": "Link Copied!",
+    "linkCopiedDescription": "The link has been copied to your clipboard.",
+    "errorTitle": "Oops!",
+    "errorDescription": "Could not copy the link."
+  },
+  "Connectivity": {
+    "online": "Online",
+    "offline": "Offline"
+  },
+  "Theme": {
+    "toggleTheme": "Toggle theme",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
   }
 }

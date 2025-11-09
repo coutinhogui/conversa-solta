@@ -11,8 +11,10 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
+import { useTranslations } from 'next-intl';
 
 export default function DecksPage() {
+  const t = useTranslations('DecksPage');
   const [filter, setFilter] = useState('All');
 
   const filteredDecks =
@@ -28,19 +30,19 @@ export default function DecksPage() {
       <div className="flex flex-col items-start justify-between gap-4 md:flex-row md:items-center">
         <div>
           <h1 className="font-headline text-3xl font-bold tracking-tight md:text-4xl">
-            All Decks
+            {t('title')}
           </h1>
           <p className="mt-2 text-lg text-muted-foreground">
-            Find the perfect set of questions for any occasion.
+            {t('subtitle')}
           </p>
         </div>
         <div className="w-full md:w-auto">
           <Select value={filter} onValueChange={setFilter}>
             <SelectTrigger className="w-full md:w-[180px]">
-              <SelectValue placeholder="Filter by category" />
+              <SelectValue placeholder={t('filterPlaceholder')} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="All">All Categories</SelectItem>
+              <SelectItem value="All">{t('allCategories')}</SelectItem>
               {deckCategories.map((category) => (
                 <SelectItem key={category} value={category}>
                   {category}

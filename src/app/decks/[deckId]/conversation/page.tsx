@@ -17,6 +17,7 @@ import ShareButton from '@/components/share-button';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
+import { useTranslations } from 'next-intl';
 
 // Helper function to shuffle an array
 const shuffleArray = (array: Question[]): Question[] => {
@@ -24,6 +25,7 @@ const shuffleArray = (array: Question[]): Question[] => {
 };
 
 export default function ConversationPage() {
+  const t = useTranslations('ConversationPage');
   const params = useParams();
   const { deckId } = params;
   const deck = useMemo(() => decks.find((d) => d.id === deckId), [deckId]);
@@ -74,24 +76,24 @@ export default function ConversationPage() {
              <Button asChild variant="ghost" className="p-0 h-auto">
               <Link href="/decks">
                 <ArrowLeft className="mr-2 h-4 w-4" />
-                Voltar
+                {t('backButton')}
               </Link>
             </Button>
             <div className="flex items-center space-x-2">
-              <Label htmlFor="shuffle-mode">Modo:</Label>
+              <Label htmlFor="shuffle-mode">{t('modeLabel')}:</Label>
               <div className="flex items-center gap-2">
                 <Switch
                   id="shuffle-mode"
                   checked={isShuffled}
                   onCheckedChange={setIsShuffled}
                 />
-                <Label htmlFor="shuffle-mode">Aleatório</Label>
+                <Label htmlFor="shuffle-mode">{t('shuffleLabel')}</Label>
               </div>
             </div>
           </div>
           {!isFinished && (
             <p className="text-sm text-muted-foreground self-end sm:self-center">
-              Pergunta {currentIndex + 1} de {questions.length}
+              {t('questionProgress', { current: currentIndex + 1, total: questions.length })}
             </p>
           )}
         </div>
@@ -109,16 +111,16 @@ export default function ConversationPage() {
               <Card className="flex min-h-[300px] w-full flex-col items-center justify-center text-center shadow-xl md:min-h-[400px]">
                 <CardHeader>
                   <CardTitle className="text-2xl font-bold font-headline">
-                    You've reached the end!
+                    {t('endTitle')}
                   </CardTitle>
                   <CardDescription>
-                    Hope you had a great conversation.
+                    {t('endSubtitle')}
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="flex flex-col gap-4">
                   <Button onClick={handleReset} size="lg">
                     <RotateCw className="mr-2 h-4 w-4" />
-                    Start Over
+                    {t('startOverButton')}
                   </Button>
                   <ShareButton
                     shareData={{
@@ -142,7 +144,7 @@ export default function ConversationPage() {
                     size="lg"
                     className="w-full md:w-auto"
                   >
-                    Next Question
+                    {t('nextQuestionButton')}
                   </Button>
                 </div>
               </Card>
@@ -153,7 +155,7 @@ export default function ConversationPage() {
           <div className="mt-6 flex w-full items-center justify-center gap-4">
             <Button variant="outline" onClick={handleReset}>
               <RotateCw className="mr-2 h-4 w-4" />
-              Restart
+              {t('restartButton')}
             </Button>
             <ShareButton
               shareData={{

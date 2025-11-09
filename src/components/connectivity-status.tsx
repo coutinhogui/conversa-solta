@@ -3,8 +3,10 @@
 import { useState, useEffect } from 'react';
 import { Wifi, WifiOff } from 'lucide-react';
 import { Badge } from './ui/badge';
+import { useTranslations } from 'next-intl';
 
 export default function ConnectivityStatus() {
+  const t = useTranslations('Connectivity');
   const [isOnline, setIsOnline] = useState(true);
 
   useEffect(() => {
@@ -33,7 +35,7 @@ export default function ConnectivityStatus() {
       ) : (
         <WifiOff className="h-4 w-4" />
       )}
-      <span>{isOnline ? 'Online' : 'Offline'}</span>
+      <span>{isOnline ? t('online') : t('offline')}</span>
     </Badge>
   );
 }

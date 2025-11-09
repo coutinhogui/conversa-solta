@@ -14,5 +14,57 @@
   },
   "DeckCard": {
     "startConversation": "Iniciar Conversa"
+  },
+  "ConversationPage": {
+    "backButton": "Voltar aos Baralhos",
+    "modeLabel": "Modo",
+    "shuffleLabel": "Aleatório",
+    "questionProgress": "Pergunta {current} de {total}",
+    "endTitle": "Você chegou ao fim!",
+    "endSubtitle": "Espero que tenha tido uma ótima conversa.",
+    "startOverButton": "Começar de Novo",
+    "nextQuestionButton": "Próxima Pergunta",
+    "restartButton": "Reiniciar"
+  },
+  "DecksPage": {
+    "title": "Todos os Baralhos",
+    "subtitle": "Encontre o conjunto perfeito de perguntas para qualquer ocasião.",
+    "filterPlaceholder": "Filtrar por categoria",
+    "allCategories": "Todas as Categorias"
+  },
+  "FavoritesPage": {
+    "title": "Baralhos Favoritos",
+    "subtitle": "Sua coleção escolhida a dedo de iniciadores de conversa.",
+    "noFavoritesTitle": "Nenhum Favorito Ainda",
+    "noFavoritesSubtitle": "Clique no ícone de estrela em qualquer baralho para adicioná-lo aos seus favoritos para acesso rápido."
+  },
+  "SettingsPage": {
+    "title": "Configurações",
+    "subtitle": "Gerencie as preferências do seu aplicativo e veja as informações.",
+    "appearanceTitle": "Aparência",
+    "appearanceSubtitle": "Personalize a aparência do aplicativo.",
+    "themeLabel": "Tema",
+    "pwaTitle": "PWA e Offline",
+    "pwaSubtitle": "Status de conectividade e informações de uso offline.",
+    "connectivityLabel": "Conectividade",
+    "offlineTitle": "Uso Offline",
+    "offlineSubtitle": "Este aplicativo é um PWA (Progressive Web App). Você pode instalá-lo no seu dispositivo para fácil acesso e uso offline. Os dados do baralho são sincronizados para disponibilidade mesmo sem conexão com a internet."
+  },
+  "Share": {
+    "shareButton": "Compartilhar",
+    "linkCopiedTitle": "Link Copiado!",
+    "linkCopiedDescription": "O link foi copiado para a sua área de transferência.",
+    "errorTitle": "Ops!",
+    "errorDescription": "Não foi possível copiar o link."
+  },
+  "Connectivity": {
+    "online": "Online",
+    "offline": "Offline"
+  },
+  "Theme": {
+    "toggleTheme": "Alternar tema",
+    "light": "Claro",
+    "dark": "Escuro",
+    "system": "Sistema"
   }
 }
