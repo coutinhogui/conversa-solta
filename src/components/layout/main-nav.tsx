@@ -3,7 +3,6 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
-import type { MainNavItem } from '@/lib/types';
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -22,17 +21,17 @@ export function MainNav() {
         <NavigationMenuList>
           {siteConfig.mainNav.map((item) => (
             <NavigationMenuItem key={item.href}>
-              <Link href={item.href} legacyBehavior passHref>
-                <NavigationMenuLink
+              <NavigationMenuLink asChild active={pathname === item.href}>
+                <Link
+                  href={item.href}
                   className={cn(
                     navigationMenuTriggerStyle(),
                     'bg-transparent'
                   )}
-                  active={pathname === item.href}
                 >
                   {item.title}
-                </NavigationMenuLink>
-              </Link>
+                </Link>
+              </NavigationMenuLink>
             </NavigationMenuItem>
           ))}
         </NavigationMenuList>
