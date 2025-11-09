@@ -75,7 +75,7 @@ export default function ConversationPage() {
   return (
     <div className="container mx-auto flex h-full max-w-2xl flex-1 flex-col items-center justify-center p-4">
       <div className="flex w-full flex-col items-start">
-        <div className="mb-4 flex w-full flex-col sm:flex-row items-start sm:items-center sm:justify-between gap-4">
+        <div className="mb-4 flex w-full flex-col items-start sm:flex-row sm:items-center sm:justify-between gap-4">
           <div className="flex flex-col items-start gap-2">
              <Button asChild variant="ghost" className="p-0 h-auto">
               <Link href="/decks">
@@ -139,7 +139,7 @@ export default function ConversationPage() {
               <Card className="relative w-full overflow-hidden shadow-xl">
                 <div className="flex min-h-[300px] flex-col items-center justify-center p-6 text-center md:min-h-[400px]">
                   <p className="font-headline text-2xl font-medium md:text-3xl">
-                    {tDecks(`${deck.id}.questions.${questionKeys[currentIndex]}`)}
+                    {tDecks(`${deck.id}.questions.${questionKeys[currentIndex]}` as any)}
                   </p>
                 </div>
                 <div className="flex justify-center border-t bg-muted/50 p-4">
