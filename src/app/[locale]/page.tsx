@@ -8,7 +8,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { decks } from '@/lib/decks';
 import DeckCard from '@/components/deck-card';
-import Link from 'next/link';
+import { Link } from '@/navigation';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import {useTranslations} from 'next-intl';
 
