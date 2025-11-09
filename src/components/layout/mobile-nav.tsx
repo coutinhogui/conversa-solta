@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { Menu, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { siteConfig } from '@/lib/config';
 import { cn } from '@/lib/utils';
 import { usePathname } from 'next/navigation';
@@ -35,6 +35,7 @@ export function MobileNav() {
           </Button>
         </SheetTrigger>
         <SheetContent side="left" className="pr-0">
+          <SheetTitle className="sr-only">Main Menu</SheetTitle>
           <Link
             href="/"
             className="flex items-center"
