@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useMemo, useCallback } from 'react';
 import { notFound, useParams } from 'next/navigation';
-import Link from 'next/link';
+import { Link } from '@/navigation';
 import { decks, type Question } from '@/lib/decks';
 import {
   Card,
