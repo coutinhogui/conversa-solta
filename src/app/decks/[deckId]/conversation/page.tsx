@@ -15,6 +15,8 @@ import { Button } from '@/components/ui/button';
 import { ArrowLeft, RotateCw } from 'lucide-react';
 import ShareButton from '@/components/share-button';
 import { AnimatePresence, motion } from 'framer-motion';
+import { Switch } from '@/components/ui/switch';
+import { Label } from '@/components/ui/label';
 
 // Helper function to shuffle an array
 const shuffleArray = (array: Question[]): Question[] => {
@@ -26,27 +28,29 @@ export default function ConversationPage() {
   const { deckId } = params;
   const deck = useMemo(() => decks.find((d) => d.id === deckId), [deckId]);
 
-  const [shuffledQuestions, setShuffledQuestions] = useState<Question[]>([]);
+  const [questions, setQuestions] = useState<Question[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [sessionKey, setSessionKey] = useState(0);
   const [shareUrl, setShareUrl] = useState('');
+  const [isShuffled, setIsShuffled] = useState(true);
 
   useEffect(() => {
     if(typeof window !== 'undefined') {
       setShareUrl(window.location.href);
     }
     if (deck) {
-      setShuffledQuestions(shuffleArray(deck.questions));
+      const initialQuestions = isShuffled ? shuffleArray(deck.questions) : deck.questions;
+      setQuestions(initialQuestions);
       setCurrentIndex(0);
     }
-  }, [deck, sessionKey]);
+  }, [deck, sessionKey, isShuffled]);
 
   const handleNext = () => {
-    if (currentIndex < shuffledQuestions.length - 1) {
+    if (currentIndex < questions.length - 1) {
       setCurrentIndex((prev) => prev + 1);
     } else {
       // End of deck, maybe show a summary or restart option
-      setCurrentIndex(shuffledQuestions.length); // Go to "end card"
+      setCurrentIndex(questions.length); // Go to "end card"
     }
   };
 
@@ -58,18 +62,34 @@ export default function ConversationPage() {
     return notFound();
   }
 
-  const isFinished = currentIndex >= shuffledQuestions.length;
+  const isFinished = currentIndex >= questions.length;
 
   return (
     <div className="container mx-auto flex h-full max-w-2xl flex-1 flex-col items-center justify-center p-4">
-      <div className="absolute left-4 top-16 md:left-8 md:top-20">
+      <div className="absolute left-4 top-16 flex w-full max-w-2xl items-center justify-between md:left-8 md:top-20">
         <Button asChild variant="ghost">
           <Link href="/decks">
             <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Decks
+            Voltar
           </Link>
         </Button>
       </div>
+
+       <div className="absolute top-32 flex w-full max-w-2xl items-center justify-between px-4 md:px-0">
+         <div className="flex items-center space-x-2">
+            <Label htmlFor="shuffle-mode">Modo:</Label>
+            <div className='flex items-center gap-2'>
+                 <Switch id="shuffle-mode" checked={isShuffled} onCheckedChange={setIsShuffled} />
+                 <Label htmlFor="shuffle-mode">Aleatório</Label>
+            </div>
+         </div>
+        {!isFinished && (
+            <p className="text-sm text-muted-foreground">
+                Pergunta {currentIndex + 1} de {questions.length}
+            </p>
+        )}
+       </div>
+
       <AnimatePresence mode="wait">
         <motion.div
           key={currentIndex + sessionKey}
@@ -106,11 +126,8 @@ export default function ConversationPage() {
           ) : (
             <Card className="relative w-full overflow-hidden shadow-xl">
               <div className="flex min-h-[300px] flex-col items-center justify-center p-6 text-center md:min-h-[400px]">
-                <p className="absolute right-4 top-4 text-sm text-muted-foreground">
-                  {currentIndex + 1} / {shuffledQuestions.length}
-                </p>
                 <p className="font-headline text-2xl font-medium md:text-3xl">
-                  {shuffledQuestions[currentIndex]}
+                  {questions[currentIndex]}
                 </p>
               </div>
               <div className="flex justify-center border-t bg-muted/50 p-4">
