@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import Link from 'next/link';
 import { Menu, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
@@ -9,6 +8,7 @@ import { siteConfig } from '@/lib/config';
 import { cn } from '@/lib/utils';
 import { usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
+import { Link } from '@/navigation';
 
 
 export function MobileNav() {
@@ -52,7 +52,7 @@ export function MobileNav() {
                   onClick={() => setOpen(false)}
                   className={cn(
                     'text-muted-foreground transition-colors hover:text-foreground',
-                    pathname.endsWith(item.href) && 'text-foreground'
+                    pathname === item.href && 'text-foreground'
                   )}
                 >
                   {item.title}

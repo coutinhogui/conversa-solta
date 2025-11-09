@@ -1,7 +1,7 @@
-import Link from 'next/link';
 import { Sparkles } from 'lucide-react';
 import { MainNav } from './main-nav';
 import { MobileNav } from './mobile-nav';
+import { Link } from '@/navigation';
 
 export default function Header() {
   return (

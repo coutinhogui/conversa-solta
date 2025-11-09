@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import {
@@ -11,6 +10,7 @@ import {
   navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu';
 import { useTranslations } from 'next-intl';
+import { Link } from '@/navigation';
 
 export function MainNav() {
   const pathname = usePathname();
@@ -28,7 +28,7 @@ export function MainNav() {
         <NavigationMenuList>
           {mainNav.map((item) => (
             <NavigationMenuItem key={item.href}>
-              <NavigationMenuLink asChild active={pathname.endsWith(item.href)}>
+              <NavigationMenuLink asChild active={pathname === item.href}>
                 <Link
                   href={item.href}
                   className={cn(

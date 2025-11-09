@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import Link from 'next/link';
+import { Link } from '@/navigation';
 import type { Deck } from '@/lib/decks';
 import {
   Card,
