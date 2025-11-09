@@ -35,11 +35,13 @@ export default function ConversationPage() {
   const [isShuffled, setIsShuffled] = useState(true);
 
   useEffect(() => {
-    if(typeof window !== 'undefined') {
+    if (typeof window !== 'undefined') {
       setShareUrl(window.location.href);
     }
     if (deck) {
-      const initialQuestions = isShuffled ? shuffleArray(deck.questions) : deck.questions;
+      const initialQuestions = isShuffled
+        ? shuffleArray(deck.questions)
+        : deck.questions;
       setQuestions(initialQuestions);
       setCurrentIndex(0);
     }
@@ -55,7 +57,7 @@ export default function ConversationPage() {
   };
 
   const handleReset = useCallback(() => {
-    setSessionKey(prev => prev + 1);
+    setSessionKey((prev) => prev + 1);
   }, []);
 
   if (!deck) {
@@ -65,8 +67,8 @@ export default function ConversationPage() {
   const isFinished = currentIndex >= questions.length;
 
   return (
-    <div className="container mx-auto flex h-full max-w-2xl flex-1 flex-col items-center justify-center p-4">
-      <div className="absolute left-4 top-16 flex w-full max-w-2xl items-center justify-between md:left-8 md:top-20">
+    <div className="container relative mx-auto flex h-full max-w-2xl flex-1 flex-col items-center justify-center p-4">
+      <div className="absolute left-4 top-4 md:left-8 md:top-6">
         <Button asChild variant="ghost">
           <Link href="/decks">
             <ArrowLeft className="mr-2 h-4 w-4" />
@@ -75,85 +77,95 @@ export default function ConversationPage() {
         </Button>
       </div>
 
-       <div className="absolute top-32 flex w-full max-w-2xl items-center justify-between px-4 md:px-0">
-         <div className="flex items-center space-x-2">
+      <div className="flex w-full flex-col items-center">
+        <div className="mb-4 flex w-full items-center justify-between">
+          <div className="flex items-center space-x-2">
             <Label htmlFor="shuffle-mode">Modo:</Label>
-            <div className='flex items-center gap-2'>
-                 <Switch id="shuffle-mode" checked={isShuffled} onCheckedChange={setIsShuffled} />
-                 <Label htmlFor="shuffle-mode">Aleatório</Label>
+            <div className="flex items-center gap-2">
+              <Switch
+                id="shuffle-mode"
+                checked={isShuffled}
+                onCheckedChange={setIsShuffled}
+              />
+              <Label htmlFor="shuffle-mode">Aleatório</Label>
             </div>
-         </div>
-        {!isFinished && (
+          </div>
+          {!isFinished && (
             <p className="text-sm text-muted-foreground">
-                Pergunta {currentIndex + 1} de {questions.length}
+              Pergunta {currentIndex + 1} de {questions.length}
             </p>
-        )}
-       </div>
-
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={currentIndex + sessionKey}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          transition={{ duration: 0.3 }}
-          className="w-full"
-        >
-          {isFinished ? (
-            <Card className="flex min-h-[300px] w-full flex-col items-center justify-center text-center shadow-xl md:min-h-[400px]">
-              <CardHeader>
-                <CardTitle className="text-2xl font-bold font-headline">
-                  You've reached the end!
-                </CardTitle>
-                <CardDescription>
-                  Hope you had a great conversation.
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="flex flex-col gap-4">
-                <Button onClick={handleReset} size="lg">
-                  <RotateCw className="mr-2 h-4 w-4" />
-                  Start Over
-                </Button>
-                 <ShareButton
-                  shareData={{
-                    title: `Check out the '${deck.title}' deck!`,
-                    text: deck.description,
-                    url: shareUrl,
-                  }}
-                />
-              </CardContent>
-            </Card>
-          ) : (
-            <Card className="relative w-full overflow-hidden shadow-xl">
-              <div className="flex min-h-[300px] flex-col items-center justify-center p-6 text-center md:min-h-[400px]">
-                <p className="font-headline text-2xl font-medium md:text-3xl">
-                  {questions[currentIndex]}
-                </p>
-              </div>
-              <div className="flex justify-center border-t bg-muted/50 p-4">
-                <Button onClick={handleNext} size="lg" className="w-full md:w-auto">
-                  Next Question
-                </Button>
-              </div>
-            </Card>
           )}
-        </motion.div>
-      </AnimatePresence>
-      {!isFinished && (
-        <div className="mt-6 flex items-center gap-4">
-          <Button variant="outline" onClick={handleReset}>
-            <RotateCw className="mr-2 h-4 w-4" />
-            Restart
-          </Button>
-          <ShareButton
-            shareData={{
-              title: `Let's discuss with the '${deck.title}' deck!`,
-              text: deck.description,
-              url: shareUrl,
-            }}
-          />
         </div>
-      )}
+
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentIndex + sessionKey}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            className="w-full"
+          >
+            {isFinished ? (
+              <Card className="flex min-h-[300px] w-full flex-col items-center justify-center text-center shadow-xl md:min-h-[400px]">
+                <CardHeader>
+                  <CardTitle className="text-2xl font-bold font-headline">
+                    You've reached the end!
+                  </CardTitle>
+                  <CardDescription>
+                    Hope you had a great conversation.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="flex flex-col gap-4">
+                  <Button onClick={handleReset} size="lg">
+                    <RotateCw className="mr-2 h-4 w-4" />
+                    Start Over
+                  </Button>
+                  <ShareButton
+                    shareData={{
+                      title: `Check out the '${deck.title}' deck!`,
+                      text: deck.description,
+                      url: shareUrl,
+                    }}
+                  />
+                </CardContent>
+              </Card>
+            ) : (
+              <Card className="relative w-full overflow-hidden shadow-xl">
+                <div className="flex min-h-[300px] flex-col items-center justify-center p-6 text-center md:min-h-[400px]">
+                  <p className="font-headline text-2xl font-medium md:text-3xl">
+                    {questions[currentIndex]}
+                  </p>
+                </div>
+                <div className="flex justify-center border-t bg-muted/50 p-4">
+                  <Button
+                    onClick={handleNext}
+                    size="lg"
+                    className="w-full md:w-auto"
+                  >
+                    Next Question
+                  </Button>
+                </div>
+              </Card>
+            )}
+          </motion.div>
+        </AnimatePresence>
+        {!isFinished && (
+          <div className="mt-6 flex items-center gap-4">
+            <Button variant="outline" onClick={handleReset}>
+              <RotateCw className="mr-2 h-4 w-4" />
+              Restart
+            </Button>
+            <ShareButton
+              shareData={{
+                title: `Let's discuss with the '${deck.title}' deck!`,
+                text: deck.description,
+                url: shareUrl,
+              }}
+            />
+          </div>
+        )}
+      </div>
     </div>
   );
 }
