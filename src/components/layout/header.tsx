@@ -2,6 +2,7 @@ import { Sparkles } from 'lucide-react';
 import { MainNav } from './main-nav';
 import { MobileNav } from './mobile-nav';
 import { Link } from '@/navigation';
+import { LanguageSwitcher } from '../language-switcher';
 
 export default function Header() {
   return (
@@ -14,7 +15,8 @@ export default function Header() {
           </span>
         </Link>
         <MainNav />
-        <div className="flex flex-1 items-center justify-end space-x-4">
+        <div className="flex flex-1 items-center justify-end space-x-2">
+          <LanguageSwitcher />
           <MobileNav />
         </div>
       </div>

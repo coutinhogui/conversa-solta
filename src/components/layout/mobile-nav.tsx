@@ -3,13 +3,17 @@
 import { useState } from 'react';
 import { Menu, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Sheet, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
+import {
+  Sheet,
+  SheetContent,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet';
 import { siteConfig } from '@/lib/config';
 import { cn } from '@/lib/utils';
 import { usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/navigation';
-
 
 export function MobileNav() {
   const [open, setOpen] = useState(false);
