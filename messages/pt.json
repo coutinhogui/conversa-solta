@@ -1,0 +1,18 @@
+
+{
+  "HomePage": {
+    "title": "Inicie uma Ótima Conversa",
+    "subtitle": "Escolha um baralho, embaralhe as cartas e deixe as perguntas guiarem você para discussões mais significativas e divertidas.",
+    "featuredDecks": "Baralhos em Destaque",
+    "exploreButton": "Explorar Todos os Baralhos"
+  },
+  "Navigation": {
+    "home": "Início",
+    "decks": "Baralhos",
+    "favorites": "Favoritos",
+    "settings": "Configurações"
+  },
+  "DeckCard": {
+    "startConversation": "Iniciar Conversa"
+  }
+}

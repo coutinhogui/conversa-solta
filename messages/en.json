@@ -1,0 +1,18 @@
+
+{
+  "HomePage": {
+    "title": "Spark a Great Conversation",
+    "subtitle": "Choose a deck, shuffle the cards, and let the questions guide you to more meaningful and fun discussions.",
+    "featuredDecks": "Featured Decks",
+    "exploreButton": "Explore All Decks"
+  },
+  "Navigation": {
+    "home": "Home",
+    "decks": "Decks",
+    "favorites": "Favorites",
+    "settings": "Settings"
+  },
+  "DeckCard": {
+    "startConversation": "Start Conversation"
+  }
+}

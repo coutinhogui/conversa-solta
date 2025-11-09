@@ -8,11 +8,19 @@ import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { siteConfig } from '@/lib/config';
 import { cn } from '@/lib/utils';
 import { usePathname } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 
 
 export function MobileNav() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
+  const t = useTranslations('Navigation');
+  const mainNav = [
+    { title: t('home'), href: '/' },
+    { title: t('decks'), href: '/decks' },
+    { title: t('favorites'), href: '/favorites' },
+    { title: t('settings'), href: '/settings' },
+  ];
 
   return (
     <div className="md:hidden">
@@ -37,14 +45,14 @@ export function MobileNav() {
           </Link>
           <div className="my-4 h-[calc(100vh-8rem)] pb-10 pl-6">
             <div className="flex flex-col space-y-3">
-              {siteConfig.mainNav.map((item) => (
+              {mainNav.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
                   onClick={() => setOpen(false)}
                   className={cn(
                     'text-muted-foreground transition-colors hover:text-foreground',
-                    pathname === item.href && 'text-foreground'
+                    pathname.endsWith(item.href) && 'text-foreground'
                   )}
                 >
                   {item.title}

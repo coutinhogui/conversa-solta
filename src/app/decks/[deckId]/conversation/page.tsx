@@ -69,8 +69,14 @@ export default function ConversationPage() {
   return (
     <div className="container mx-auto flex h-full max-w-2xl flex-1 flex-col items-center justify-center p-4">
       <div className="flex w-full flex-col items-start">
-        <div className="mb-4 flex w-full flex-wrap items-center justify-between gap-4">
+        <div className="mb-4 flex w-full flex-col sm:flex-row items-start sm:items-center sm:justify-between gap-4">
           <div className="flex flex-col items-start gap-2">
+             <Button asChild variant="ghost" className="p-0 h-auto">
+              <Link href="/decks">
+                <ArrowLeft className="mr-2 h-4 w-4" />
+                Voltar
+              </Link>
+            </Button>
             <div className="flex items-center space-x-2">
               <Label htmlFor="shuffle-mode">Modo:</Label>
               <div className="flex items-center gap-2">
@@ -82,15 +88,9 @@ export default function ConversationPage() {
                 <Label htmlFor="shuffle-mode">Aleatório</Label>
               </div>
             </div>
-            <Button asChild variant="ghost" className="p-0 h-auto">
-              <Link href="/decks">
-                <ArrowLeft className="mr-2 h-4 w-4" />
-                Voltar
-              </Link>
-            </Button>
           </div>
           {!isFinished && (
-            <p className="text-sm text-muted-foreground">
+            <p className="text-sm text-muted-foreground self-end sm:self-center">
               Pergunta {currentIndex + 1} de {questions.length}
             </p>
           )}

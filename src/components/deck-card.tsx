@@ -12,6 +12,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import FavoriteButton from './favorite-button';
+import { useTranslations } from 'next-intl';
 
 interface DeckCardProps {
   deck: Deck;
@@ -20,6 +21,7 @@ interface DeckCardProps {
 }
 
 export default function DeckCard({ deck, imageUrl, imageHint }: DeckCardProps) {
+  const t = useTranslations('DeckCard');
   return (
     <Card className="flex h-full flex-col overflow-hidden transition-shadow hover:shadow-lg">
       <CardHeader className="relative h-48 w-full p-0">
@@ -46,7 +48,7 @@ export default function DeckCard({ deck, imageUrl, imageHint }: DeckCardProps) {
       </CardContent>
       <CardFooter className="p-4 pt-0">
         <Button asChild className="w-full">
-          <Link href={`/decks/${deck.id}/conversation`}>Start Conversation</Link>
+          <Link href={`/decks/${deck.id}/conversation`}>{t('startConversation')}</Link>
         </Button>
       </CardFooter>
     </Card>
