@@ -12,13 +12,15 @@ import { usePathname, useRouter } from '@/navigation';
 import { useTransition } from 'react';
 import { useLocale } from 'next-intl';
 
+type Locale = 'en' | 'pt';
+
 export function LanguageSwitcher() {
   const router = useRouter();
   const pathname = usePathname();
   const locale = useLocale();
   const [isPending, startTransition] = useTransition();
 
-  const handleLanguageChange = (nextLocale: string) => {
+  const handleLanguageChange = (nextLocale: Locale) => {
     startTransition(() => {
       router.replace(pathname, { locale: nextLocale });
     });

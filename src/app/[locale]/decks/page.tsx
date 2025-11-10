@@ -1,6 +1,3 @@
-'use client';
-
-import { useState } from 'react';
 import { decks, deckCategories } from '@/lib/decks';
 import DeckCard from '@/components/deck-card';
 import {
@@ -12,16 +9,12 @@ import {
 } from '@/components/ui/select';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { useTranslations } from 'next-intl';
+import {unstable_setRequestLocale} from 'next-intl/server';
 
-export default function DecksPage() {
+export default function DecksPage({params: {locale}}: {params: {locale: string}}) {
+  unstable_setRequestLocale(locale);
   const t = useTranslations('DecksPage');
-  const [filter, setFilter] = useState('All');
 
-  const filteredDecks =
-    filter === 'All'
-      ? decks
-      : decks.filter((deck) => deck.category === filter);
-  
   const getImage = (id: string) => PlaceHolderImages.find(img => img.id === id)?.imageUrl || 'https://picsum.photos/seed/1/600/400';
   const getHint = (id: string) => PlaceHolderImages.find(img => img.id === id)?.imageHint || 'abstract';
 
@@ -36,24 +29,9 @@ export default function DecksPage() {
             {t('subtitle')}
           </p>
         </div>
-        <div className="w-full md:w-auto">
-          <Select value={filter} onValueChange={setFilter}>
-            <SelectTrigger className="w-full md:w-[180px]">
-              <SelectValue placeholder={t('filterPlaceholder')} />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="All">{t('allCategories')}</SelectItem>
-              {deckCategories.map((category) => (
-                <SelectItem key={category} value={category}>
-                  {category}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
       </div>
       <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {filteredDecks.map((deck) => (
+        {decks.map((deck) => (
           <DeckCard key={deck.id} deck={deck} imageUrl={getImage(deck.image)} imageHint={getHint(deck.image)} />
         ))}
       </div>

@@ -42,7 +42,7 @@ export default function SettingsPage() {
             <CardDescription>
              {t('pwaSubtitle')}
             </CardDescription>
-          </Header>
+          </CardHeader>
           <CardContent className="space-y-4">
              <div className="flex items-center justify-between">
               <span className="text-sm font-medium">{t('connectivityLabel')}</span>

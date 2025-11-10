@@ -9,8 +9,10 @@ import { ThemeToggle } from '@/components/theme-toggle';
 import ConnectivityStatus from '@/components/connectivity-status';
 import { Smartphone } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import {unstable_setRequestLocale} from 'next-intl/server';
 
-export default function SettingsPage() {
+export default function SettingsPage({params: {locale}}: {params: {locale: string}}) {
+  unstable_setRequestLocale(locale);
   const t = useTranslations('SettingsPage');
   return (
     <div className="container mx-auto max-w-2xl p-4 md:p-8">

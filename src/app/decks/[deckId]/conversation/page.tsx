@@ -3,7 +3,7 @@
 import { useEffect, useState, useMemo, useCallback } from 'react';
 import { notFound, useParams } from 'next/navigation';
 import { Link } from '@/navigation';
-import { decks, type Question } from '@/lib/decks';
+import { decks, type QuestionKey } from '@/lib/decks';
 import {
   Card,
   CardContent,
@@ -20,17 +20,18 @@ import { Label } from '@/components/ui/label';
 import { useTranslations } from 'next-intl';
 
 // Helper function to shuffle an array
-const shuffleArray = (array: Question[]): Question[] => {
+const shuffleArray = (array: QuestionKey[]): QuestionKey[] => {
   return [...array].sort(() => Math.random() - 0.5);
 };
 
 export default function ConversationPage() {
   const t = useTranslations('ConversationPage');
+  const tDecks = useTranslations('Decks');
   const params = useParams();
   const { deckId } = params;
   const deck = useMemo(() => decks.find((d) => d.id === deckId), [deckId]);
 
-  const [questions, setQuestions] = useState<Question[]>([]);
+  const [questions, setQuestions] = useState<QuestionKey[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [sessionKey, setSessionKey] = useState(0);
   const [shareUrl, setShareUrl] = useState('');
@@ -42,8 +43,8 @@ export default function ConversationPage() {
     }
     if (deck) {
       const initialQuestions = isShuffled
-        ? shuffleArray(deck.questions)
-        : deck.questions;
+        ? shuffleArray(deck.questionKeys)
+        : deck.questionKeys;
       setQuestions(initialQuestions);
       setCurrentIndex(0);
     }
@@ -65,6 +66,9 @@ export default function ConversationPage() {
   if (!deck) {
     return notFound();
   }
+
+  const deckTitle = tDecks(`${deck.id}.title`);
+  const deckDescription = tDecks(`${deck.id}.description`);
 
   const isFinished = currentIndex >= questions.length;
 
@@ -124,8 +128,8 @@ export default function ConversationPage() {
                   </Button>
                   <ShareButton
                     shareData={{
-                      title: `Check out the '${deck.title}' deck!`,
-                      text: deck.description,
+                      title: `Check out the '${deckTitle}' deck!`,
+                      text: deckDescription,
                       url: shareUrl,
                     }}
                   />
@@ -159,8 +163,8 @@ export default function ConversationPage() {
             </Button>
             <ShareButton
               shareData={{
-                title: `Let's discuss with the '${deck.title}' deck!`,
-                text: deck.description,
+                title: `Let's discuss with the '${deckTitle}' deck!`,
+                text: deckDescription,
                 url: shareUrl,
               }}
             />
