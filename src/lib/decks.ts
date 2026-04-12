@@ -1,5 +1,6 @@
 
 import { deploymentBasePath } from './site';
+import { type DeckMetadata, enrichDecks } from './deck-metadata';
 
 export type Deck = {
   id: string;
@@ -10,12 +11,12 @@ export type Deck = {
   questions: Record<string, string>;
   featured?: boolean;
   image: string;
-};
+} & Partial<DeckMetadata>;
 
 type DeckCategory = Deck['category'];
 
 // Fallback decks in case JSON loading fails
-const fallbackDecks: Deck[] = [
+const fallbackDecksRaw: Deck[] = [
   {
     id: 'icebreakers',
     title: 'Quebra-gelo',
@@ -112,6 +113,8 @@ const fallbackDecks: Deck[] = [
   },
 ];
 
+const fallbackDecks: Deck[] = enrichDecks(fallbackDecksRaw);
+
 // Cache for loaded decks
 let cachedDecks: Deck[] | null = null;
 
@@ -141,7 +144,7 @@ async function loadDecksFromFilesystem(): Promise<Deck[]> {
     })
   );
 
-  return loadedDecks;
+  return enrichDecks(loadedDecks);
 }
 
 async function loadDecksFromHttp(baseUrl?: string): Promise<Deck[]> {
@@ -163,7 +166,7 @@ async function loadDecksFromHttp(baseUrl?: string): Promise<Deck[]> {
     })
   );
 
-  return deckResponses.filter((deck): deck is Deck => deck !== null);
+  return enrichDecks(deckResponses.filter((deck): deck is Deck => deck !== null));
 }
 
 /**
