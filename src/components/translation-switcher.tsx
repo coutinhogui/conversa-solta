@@ -3,6 +3,16 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Languages } from 'lucide-react';
 import { siteConfig } from '@/lib/site';
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectSeparator,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 
 declare global {
   interface Window {
@@ -154,8 +164,7 @@ export default function TranslationSwitcher() {
     };
   }, [languages]);
 
-  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const language = event.target.value;
+  const handleChange = (language: string) => {
     setSelectedLanguage(language);
     persistLanguage(language);
     window.location.reload();
@@ -173,27 +182,33 @@ export default function TranslationSwitcher() {
       <span className="hidden text-xs font-medium text-muted-foreground sm:inline">
         {siteConfig.translation.label}
       </span>
-      <select
-        id="translation-switcher"
-        value={selectedLanguage}
-        onChange={handleChange}
-        className="min-w-0 max-w-[150px] bg-transparent text-sm font-medium text-foreground outline-none"
-      >
-        <optgroup label="Mais usados">
+      <Select value={selectedLanguage} onValueChange={handleChange}>
+        <SelectTrigger
+          id="translation-switcher"
+          className="h-auto min-w-0 max-w-[170px] border-0 bg-transparent px-0 py-0 text-sm font-medium text-foreground shadow-none ring-0 focus:ring-0 focus:ring-offset-0"
+        >
+          <SelectValue placeholder={siteConfig.translation.helper} />
+        </SelectTrigger>
+        <SelectContent className="max-h-80 min-w-[240px]">
+          <SelectGroup>
+            <SelectLabel>Mais usados</SelectLabel>
           {siteConfig.translation.commonLanguages.map((language) => (
-            <option key={language.code} value={language.code}>
+            <SelectItem key={language.code} value={language.code}>
               {language.label}
-            </option>
+            </SelectItem>
           ))}
-        </optgroup>
-        <optgroup label="Outros idiomas">
+          </SelectGroup>
+          <SelectSeparator />
+          <SelectGroup>
+            <SelectLabel>Outros idiomas</SelectLabel>
           {siteConfig.translation.extendedLanguages.map((language) => (
-            <option key={language.code} value={language.code}>
+            <SelectItem key={language.code} value={language.code}>
               {language.label}
-            </option>
+            </SelectItem>
           ))}
-        </optgroup>
-      </select>
+          </SelectGroup>
+        </SelectContent>
+      </Select>
       <span className="hidden text-xs text-muted-foreground xl:inline">
         {status === 'error'
           ? siteConfig.translation.unavailable
