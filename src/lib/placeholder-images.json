@@ -1,0 +1,40 @@
+{
+  "placeholderImages": [
+    {
+      "id": "deck-icebreakers",
+      "description": "A vibrant abstract image representing conversation starters.",
+      "imageUrl": "https://images.unsplash.com/photo-1705254613735-1abb457f8a60?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxhYnN0cmFjdCUyMGNvbG9yZnVsfGVufDB8fHx8MTc2MjYwOTQ3NXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "abstract colorful"
+    },
+    {
+      "id": "deck-deep-thoughts",
+      "description": "A starry night sky to represent deep and thoughtful questions.",
+      "imageUrl": "https://images.unsplash.com/photo-1604913137600-31e385852fd5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8Z2FsYXh5JTIwbmlnaHR8ZW58MHx8fHwxNzYyNjYzMTk4fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "galaxy night"
+    },
+    {
+      "id": "deck-couples",
+      "description": "A romantic sunset image for a deck aimed at couples.",
+      "imageUrl": "https://images.unsplash.com/photo-1494774157365-9e04c6720e47?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxjb3VwbGUlMjBzdW5zZXR8ZW58MHx8fHwxNzYyNjU2NDA4fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "couple sunset"
+    },
+    {
+      "id": "deck-family",
+      "description": "A cheerful image of a family gathering.",
+      "imageUrl": "https://images.unsplash.com/photo-1578515637272-e4afe0b8ec82?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8ZmFtaWx5JTIwZGlubmVyfGVufDB8fHx8MTc2MjYxMDkzMnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "family dinner"
+    },
+    {
+      "id": "deck-work",
+      "description": "A modern office environment for work-related team building.",
+      "imageUrl": "https://images.unsplash.com/photo-1572021335469-31706a17aaef?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxvZmZpY2UlMjB0ZWFtfGVufDB8fHx8MTc2MjYwNTU5MXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "office team"
+    },
+    {
+      "id": "deck-funny",
+      "description": "A playful and funny image to represent lighthearted questions.",
+      "imageUrl": "https://images.unsplash.com/photo-1518770352423-dce09a3d3307?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxmdW5ueSUyMGFuaW1hbHN8ZW58MHx8fHwxNzYyNjYzMTk4fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "funny animals"
+    }
+  ]
+}
