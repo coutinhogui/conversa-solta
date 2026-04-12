@@ -39,6 +39,22 @@ npm run start
 npm run typecheck
 ```
 
+## Deploy no GitHub Pages
+
+O projeto esta configurado para export estatico com Next.js e publicar no GitHub Pages via GitHub Actions.
+
+Fluxo esperado:
+
+1. faça merge da PR na `main`
+2. abra a aba `Actions` no GitHub
+3. acompanhe o workflow `Deploy GitHub Pages`
+4. o site sera publicado no Pages usando os arquivos da pasta `out`
+
+Observacao:
+
+- em producao no GitHub Pages, o app usa automaticamente o nome do repositorio como `basePath`
+- localmente, o site continua rodando sem `basePath`
+
 ## Estrutura principal
 
 - `src/app`: paginas do App Router

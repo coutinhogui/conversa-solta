@@ -1,18 +1,27 @@
 import type { NextConfig } from 'next';
- 
+
+const repositoryName = process.env.GITHUB_REPOSITORY?.split('/')[1];
+const basePath =
+  process.env.GITHUB_ACTIONS === 'true' && repositoryName ? `/${repositoryName}` : '';
+
 const nextConfig: NextConfig = {
-    images: {
-        remotePatterns: [
-            {
-                protocol: 'https',
-                hostname: 'images.unsplash.com',
-            },
-            {
-                protocol: 'https',
-                hostname: 'picsum.photos',
-            },
-        ],
-    },
+  output: 'export',
+  trailingSlash: true,
+  basePath,
+  assetPrefix: basePath,
+  images: {
+    unoptimized: true,
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'picsum.photos',
+      },
+    ],
+  },
 };
- 
+
 export default nextConfig;
