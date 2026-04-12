@@ -62,7 +62,10 @@ export const siteConfig = {
     description:
       'Escolha um baralho para quebrar o gelo, sair do obvio ou cair em um assunto inesperado.',
     filterPlaceholder: 'Filtrar por categoria',
+    thematicFilterPlaceholder: 'Filtrar por tema',
+    searchPlaceholder: 'Pesquisar por titulo, descricao ou tags',
     allCategories: 'Todas as categorias',
+    allThemes: 'Todos os temas',
     emptyState: 'Nenhum tema combina com esse filtro.',
   },
   conversation: {
