@@ -1,6 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
+import { Search } from 'lucide-react';
 import {
   Select,
   SelectContent,
@@ -9,6 +10,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
+import { Input } from '@/components/ui/input';
 import { type Deck } from '@/lib/decks';
 import DeckCard from '@/components/deck-card';
 import { siteConfig } from '@/lib/site';
@@ -81,14 +83,47 @@ function groupDecks(decks: Deck[]): DeckGroup[] {
 
 export default function AllDecksClientPage({ decks, categories }: AllDecksClientPageProps) {
   const [filter, setFilter] = useState<string>(siteConfig.decksPage.allCategories);
+  const [themeFilter, setThemeFilter] = useState<string>(siteConfig.decksPage.allThemes);
+  const [query, setQuery] = useState('');
+
+  const thematicCategories = useMemo(
+    () =>
+      Array.from(
+        new Set(decks.map((deck) => deck.taxonomy?.subcategory).filter(Boolean) as string[])
+      ).sort((left, right) => left.localeCompare(right, 'pt-BR')),
+    [decks]
+  );
+
+  const normalizedQuery = query.trim().toLocaleLowerCase('pt-BR');
 
   const filteredDecks = useMemo(
     () =>
-      decks.filter(
-        (deck) =>
-          filter === siteConfig.decksPage.allCategories || deck.category === filter
-      ),
-    [decks, filter]
+      decks.filter((deck) => {
+        const matchesCategory =
+          filter === siteConfig.decksPage.allCategories || deck.category === filter;
+
+        const matchesTheme =
+          themeFilter === siteConfig.decksPage.allThemes ||
+          deck.taxonomy?.subcategory === themeFilter;
+
+        const haystack = [
+          deck.title,
+          deck.description,
+          ...(deck.smartTags ?? []),
+          ...(deck.searchableTags ?? []),
+          ...(deck.tags ?? []),
+          deck.taxonomy?.subcategory ?? '',
+          deck.taxonomy?.audience ?? '',
+          deck.taxonomy?.tone ?? '',
+        ]
+          .join(' ')
+          .toLocaleLowerCase('pt-BR');
+
+        const matchesQuery = normalizedQuery.length === 0 || haystack.includes(normalizedQuery);
+
+        return matchesCategory && matchesTheme && matchesQuery;
+      }),
+    [decks, filter, themeFilter, normalizedQuery]
   );
 
   const groupedDecks = useMemo(() => groupDecks(filteredDecks), [filteredDecks]);
@@ -113,7 +148,16 @@ export default function AllDecksClientPage({ decks, categories }: AllDecksClient
             <Badge variant="outline">{categories.length} categorias principais</Badge>
           </div>
         </div>
-        <div className="w-full md:w-auto">
+        <div className="grid w-full gap-3 md:w-auto md:grid-cols-[minmax(260px,1fr)_220px_220px]">
+          <div className="relative">
+            <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+            <Input
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+              placeholder={siteConfig.decksPage.searchPlaceholder}
+              className="pl-9"
+            />
+          </div>
           <Select value={filter} onValueChange={setFilter}>
             <SelectTrigger className="w-full md:w-[220px]">
               <SelectValue placeholder={siteConfig.decksPage.filterPlaceholder} />
@@ -129,7 +173,42 @@ export default function AllDecksClientPage({ decks, categories }: AllDecksClient
               ))}
             </SelectContent>
           </Select>
+          <Select value={themeFilter} onValueChange={setThemeFilter}>
+            <SelectTrigger className="w-full md:w-[220px]">
+              <SelectValue placeholder={siteConfig.decksPage.thematicFilterPlaceholder} />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value={siteConfig.decksPage.allThemes}>
+                {siteConfig.decksPage.allThemes}
+              </SelectItem>
+              {thematicCategories.map((category) => (
+                <SelectItem key={category} value={category}>
+                  {category}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
+      </div>
+
+      <div className="mt-6 flex flex-wrap gap-2">
+        <Badge
+          variant={themeFilter === siteConfig.decksPage.allThemes ? 'secondary' : 'outline'}
+          className="cursor-pointer"
+          onClick={() => setThemeFilter(siteConfig.decksPage.allThemes)}
+        >
+          {siteConfig.decksPage.allThemes}
+        </Badge>
+        {thematicCategories.map((category) => (
+          <Badge
+            key={category}
+            variant={themeFilter === category ? 'secondary' : 'outline'}
+            className="cursor-pointer"
+            onClick={() => setThemeFilter(category)}
+          >
+            {category}
+          </Badge>
+        ))}
       </div>
 
       {groupedDecks.length > 0 ? (
