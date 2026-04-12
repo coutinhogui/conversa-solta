@@ -1,6 +1,8 @@
 # Conversa Solta
 
-Aplicativo web em Next.js para quebrar o gelo, puxar assunto e gerar conversas aleatorias com temas prontos.
+Conversa Solta e um app web para quebrar o gelo, puxar assunto e abrir conversas inesperadas com perguntas prontas e traducao automatica no navegador.
+
+Ideal para amigos, casais, encontros, equipes e qualquer situacao em que falta assunto ou sobra vontade de conversar.
 
 ## Stack
 
@@ -17,6 +19,7 @@ Aplicativo web em Next.js para quebrar o gelo, puxar assunto e gerar conversas a
 - modo embaralhado nas perguntas
 - traducao automatica client-side por seletor de idioma
 - suporte PWA basico
+- interface otimizada para uso rapido em celular e desktop
 
 ## Rodando localmente
 

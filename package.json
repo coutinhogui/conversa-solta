@@ -1,6 +1,7 @@
 {
   "name": "nextn",
   "version": "0.1.0",
+  "description": "Conversa Solta: app web para quebrar o gelo e puxar assunto com perguntas prontas.",
   "private": true,
   "scripts": {
     "dev": "next dev -p 9002",
