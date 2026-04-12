@@ -50,7 +50,7 @@ export default function DeckCard({ deck, imageUrl, imageHint }: DeckCardProps) {
       </CardContent>
       <CardFooter className="p-4 pt-0">
         <Button asChild className="w-full">
-          <Link href={`/decks/${deck.id}/conversation`}>{t('startConversation')}</Link>
+          <Link href={`/decks/${deck.id}`}>{t('startConversation')}</Link>
         </Button>
       </CardFooter>
     </Card>
