@@ -12,7 +12,7 @@ export default function NotFound() {
         Page Not Found
       </p>
       <p className="mt-2 text-muted-foreground">
-        Sorry, we couldn&apos;t find the page you were looking for.
+        Sorry, we couldn't find the page you were looking for.
       </p>
       <Button asChild className="mt-8">
         <Link href="/">

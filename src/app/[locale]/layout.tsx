@@ -16,7 +16,10 @@ export default async function LocaleLayout({
   children: React.ReactNode;
   params: { locale: string };
 }) {
+  // Validate that the incoming `locale` parameter is valid
   if (!locales.includes(locale as any)) notFound();
+  
+  // Enable static rendering
   unstable_setRequestLocale(locale);
 
   let messages;

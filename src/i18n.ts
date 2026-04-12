@@ -1,4 +1,12 @@
-// This file is intentionally left blank.
-// The `getRequestConfig` and its server-side logic have been removed 
-// to support a fully static site. Message loading is now handled 
-// directly in the `[locale]/layout.tsx` file.
+import {notFound} from 'next/navigation';
+import {getRequestConfig} from 'next-intl/server';
+ 
+const locales = ['en', 'pt'];
+ 
+export default getRequestConfig(async ({locale}) => {
+  if (!locales.includes(locale as any)) notFound();
+ 
+  return {
+    messages: (await import(`../messages/${locale}.json`)).default
+  };
+});
