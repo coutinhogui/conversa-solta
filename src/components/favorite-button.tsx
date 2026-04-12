@@ -5,6 +5,7 @@ import { useFavorites } from '@/hooks/use-favorites';
 import { Button } from './ui/button';
 import { cn } from '@/lib/utils';
 import { Skeleton } from './ui/skeleton';
+import { siteConfig } from '@/lib/site';
 
 interface FavoriteButtonProps {
   deckId: string;
@@ -34,7 +35,7 @@ export default function FavoriteButton({ deckId }: FavoriteButtonProps) {
       variant="secondary"
       size="icon"
       onClick={handleFavorite}
-      aria-label={favorite ? 'Remove from favorites' : 'Add to favorites'}
+      aria-label={favorite ? siteConfig.favoritesButton.remove : siteConfig.favoritesButton.add}
       className="rounded-full bg-background/70 hover:bg-background"
     >
       <Star

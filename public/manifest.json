@@ -1,7 +1,7 @@
 {
-  "name": "Shuffle Talks PWA",
-  "short_name": "ShuffleTalks",
-  "description": "Spark meaningful conversations with card decks.",
+  "name": "Conversa Solta",
+  "short_name": "Conversa",
+  "description": "Perguntas e assuntos para quebrar o gelo, puxar papo e destravar conversas improvaveis.",
   "icons": [
     {
       "src": "/icon-192.png",

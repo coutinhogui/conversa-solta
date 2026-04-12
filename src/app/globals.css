@@ -56,3 +56,13 @@
     @apply bg-background text-foreground;
   }
 }
+
+.goog-te-banner-frame.skiptranslate,
+.goog-logo-link,
+.goog-te-gadget,
+.goog-te-gadget .goog-te-combo,
+#goog-gt-tt,
+.goog-tooltip,
+.goog-text-highlight {
+  display: none !important;
+}

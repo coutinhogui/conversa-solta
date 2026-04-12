@@ -10,15 +10,11 @@ import {
   navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu';
 import Link from 'next/link';
+import { siteConfig } from '@/lib/site';
 
 export function MainNav() {
   const pathname = usePathname();
-  const mainNav = [
-    { title: 'Home', href: '/' },
-    { title: 'Decks', href: '/decks' },
-    { title: 'Favorites', href: '/favorites' },
-    { title: 'Settings', href: '/settings' },
-  ];
+  const mainNav = siteConfig.navigation;
 
   return (
     <div className="mr-4 hidden md:flex">

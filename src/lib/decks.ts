@@ -3,7 +3,7 @@ export type Deck = {
   id: string;
   title: string;
   description: string;
-  category: 'Social' | 'Personal' | 'Relationships' | 'Fun';
+  category: 'Social' | 'Pessoal' | 'Relacionamentos' | 'Diversao';
   tags: string[];
   questions: Record<string, string>;
   featured?: boolean;
@@ -13,94 +13,94 @@ export type Deck = {
 export const decks: Deck[] = [
   {
     id: 'icebreakers',
-    title: 'Icebreakers',
-    description: 'Perfect for new friends or colleagues.',
+    title: 'Quebra-gelo',
+    description: 'Perfeito para comecar papo com gente nova sem ficar travado.',
     category: 'Social',
-    tags: ['getting to know you', 'lighthearted'],
+    tags: ['conhecer pessoas', 'leve', 'inicio'],
     questions: {
-      "q1": "If you could have any superpower, what would it be and why?",
-      "q2": "What’s the best piece of advice you’ve ever received?",
-      "q3": "What’s a hidden talent you have?",
-      "q4": "If you could travel to any period in history, when would you go?",
-      "q5": "What’s your go-to karaoke song?"
+      "q1": "Se voce pudesse ter qualquer superpoder, qual seria e por que?",
+      "q2": "Qual foi o melhor conselho que voce ja recebeu?",
+      "q3": "Qual talento escondido voce tem?",
+      "q4": "Se pudesse viajar para qualquer epoca da historia, para qual iria?",
+      "q5": "Qual musica voce sempre escolheria no karaoke?"
     },
     featured: true,
     image: 'deck-icebreakers',
   },
   {
     id: 'deep-thoughts',
-    title: 'Deep Thoughts',
-    description: 'For when you want to get philosophical.',
-    category: 'Personal',
-    tags: ['philosophy', 'introspection', 'serious'],
+    title: 'Papo profundo',
+    description: 'Para quando a conversa pede mais reflexao e menos superficie.',
+    category: 'Pessoal',
+    tags: ['filosofia', 'introspeccao', 'reflexao'],
     questions: {
-      "q1": "What does it mean to live a good life?",
-      "q2": "Is happiness a choice?",
-      "q3": "What do you think is the purpose of humanity?",
-      "q4": "What is a belief you hold with which many people disagree?",
-      "q5": "How do you define success?"
+      "q1": "O que significa viver uma boa vida para voce?",
+      "q2": "Felicidade e uma escolha?",
+      "q3": "Qual voce acha que e o proposito da humanidade?",
+      "q4": "Em que voce acredita e muita gente discorda?",
+      "q5": "Como voce define sucesso?"
     },
     featured: true,
     image: 'deck-deep-thoughts',
   },
   {
     id: 'for-couples',
-    title: 'For Couples',
-    description: 'Strengthen your bond and learn more about each other.',
-    category: 'Relationships',
-    tags: ['love', 'partnership', 'intimacy'],
+    title: 'Entre nos dois',
+    description: 'Perguntas para casal sair do automatico e se redescobrir.',
+    category: 'Relacionamentos',
+    tags: ['amor', 'parceria', 'intimidade'],
     questions: {
-      "q1": "What is one of your favorite memories of us?",
-      "q2": "In what ways have we grown together?",
-      "q3": "What is something I can do to make you feel more loved?",
-      "q4": "What future goal are you most excited to achieve with me?",
-      "q5": "Describe a moment you felt proud of me."
+      "q1": "Qual memoria nossa voce gosta de revisitar?",
+      "q2": "De que maneiras voce acha que crescemos juntos?",
+      "q3": "O que eu posso fazer para voce se sentir mais amado?",
+      "q4": "Qual meta futura voce mais quer conquistar comigo?",
+      "q5": "Descreva um momento em que voce se sentiu orgulhoso de mim."
     },
     featured: true,
     image: 'deck-couples',
   },
   {
     id: 'family-night',
-    title: 'Family Night',
-    description: 'Fun questions for all ages.',
+    title: 'Noite em familia',
+    description: 'Perguntas leves e divertidas para todo mundo participar.',
     category: 'Social',
-    tags: ['family', 'kids', 'fun'],
+    tags: ['familia', 'criancas', 'diversao'],
     questions: {
-      "q1": "What was the best part of your day?",
-      "q2": "If our family was a team of superheroes, what would our name be?",
-      "q3": "What’s one rule you would make for our family for a day?",
-      "q4": "What’s your favorite family tradition?",
-      "q5": "If you could plan a perfect family vacation, where would we go?"
+      "q1": "Qual foi a melhor parte do seu dia?",
+      "q2": "Se nossa familia fosse um time de super-herois, qual seria o nome?",
+      "q3": "Qual regra voce criaria para a nossa familia por um dia?",
+      "q4": "Qual tradicao da familia voce mais gosta?",
+      "q5": "Se pudesse planejar as ferias perfeitas em familia, para onde iriamos?"
     },
     image: 'deck-family',
   },
   {
     id: 'team-builders',
-    title: 'Team Builders',
-    description: 'Get to know your coworkers on a new level.',
+    title: 'Time sem script',
+    description: 'Perguntas para aproximar colegas e tirar o papo do automatico.',
     category: 'Social',
-    tags: ['work', 'team', 'corporate'],
+    tags: ['trabalho', 'time', 'empresa'],
     questions: {
-      "q1": "What’s one professional skill you’re currently working on?",
-      "q2": "Who in the company would you most like to swap jobs with for a day?",
-      "q3": "What’s the most important lesson you’ve learned in your career?",
-      "q4": "What does a productive day at work look like for you?",
-      "q5": "What’s one thing that could improve our team’s collaboration?"
+      "q1": "Qual habilidade profissional voce esta tentando desenvolver agora?",
+      "q2": "Com quem da empresa voce trocaria de funcao por um dia?",
+      "q3": "Qual foi a licao mais importante da sua carreira ate aqui?",
+      "q4": "Como e um dia de trabalho realmente produtivo para voce?",
+      "q5": "O que poderia melhorar a colaboracao do nosso time?"
     },
     image: 'deck-work',
   },
   {
     id: 'would-you-rather',
-    title: 'Would You Rather?',
-    description: 'Hilarious and thought-provoking choices.',
-    category: 'Fun',
-    tags: ['party', 'funny', 'choices'],
+    title: 'O que voce prefere?',
+    description: 'Escolhas absurdas, engracadas e capazes de render um papo otimo.',
+    category: 'Diversao',
+    tags: ['festa', 'engracado', 'escolhas'],
     questions: {
-        "q1": "Would you rather have the ability to fly or to be invisible?",
-        "q2": "Would you rather live without music or without movies?",
-        "q3": "Would you rather know all the secrets of the universe or have unlimited wealth?",
-        "q4": "Would you rather be able to talk to animals or speak every human language?",
-        "q5": "Would you rather have a personal chef or a personal driver?"
+        "q1": "Voce preferiria voar ou ficar invisivel?",
+        "q2": "Voce preferiria viver sem musica ou sem filmes?",
+        "q3": "Voce preferiria saber todos os segredos do universo ou ter riqueza ilimitada?",
+        "q4": "Voce preferiria falar com animais ou dominar todas as linguas humanas?",
+        "q5": "Voce preferiria ter um chef particular ou um motorista particular?"
     },
     featured: true,
     image: 'deck-funny',

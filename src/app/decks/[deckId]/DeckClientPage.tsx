@@ -18,6 +18,7 @@ import ShareButton from '@/components/share-button';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
+import { siteConfig } from '@/lib/site';
 
 // Helper function to shuffle an array
 const shuffleArray = <T,>(array: T[]): T[] => {
@@ -80,24 +81,24 @@ export default function ConversationPage({ deckId }: ConversationPageProps) {
              <Button asChild variant="ghost" className="p-0 h-auto">
               <Link href="/decks">
                 <ArrowLeft className="mr-2 h-4 w-4" />
-                Back to Decks
+                {siteConfig.conversation.backToDecks}
               </Link>
             </Button>
             <div className="flex items-center space-x-2">
-              <Label htmlFor="shuffle-mode">Mode:</Label>
+              <Label htmlFor="shuffle-mode">{siteConfig.conversation.modeLabel}:</Label>
               <div className="flex items-center gap-2">
                 <Switch
                   id="shuffle-mode"
                   checked={isShuffled}
                   onCheckedChange={setIsShuffled}
                 />
-                <Label htmlFor="shuffle-mode">Shuffle</Label>
+                <Label htmlFor="shuffle-mode">{siteConfig.conversation.shuffleLabel}</Label>
               </div>
             </div>
           </div>
           {!isFinished && (
             <p className="text-sm text-muted-foreground self-end sm:self-center">
-              Question {currentIndex + 1} of {questionKeys.length}
+              {siteConfig.conversation.progress(currentIndex + 1, questionKeys.length)}
             </p>
           )}
         </div>
@@ -115,20 +116,20 @@ export default function ConversationPage({ deckId }: ConversationPageProps) {
               <Card className="flex min-h-[300px] w-full flex-col items-center justify-center text-center shadow-xl md:min-h-[400px]">
                 <CardHeader>
                   <CardTitle className="text-2xl font-bold font-headline">
-                    You've reached the end!
+                    {siteConfig.conversation.finishedTitle}
                   </CardTitle>
                   <CardDescription>
-                    Hope you had a great conversation.
+                    {siteConfig.conversation.finishedDescription}
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="flex flex-col gap-4">
                   <Button onClick={handleReset} size="lg">
                     <RotateCw className="mr-2 h-4 w-4" />
-                    Start Over
+                    {siteConfig.conversation.startOver}
                   </Button>
                   <ShareButton
                     shareData={{
-                      title: `Check out the '${deck.title}' deck!`,
+                      title: siteConfig.conversation.shareDeckTitle(deck.title),
                       text: deck.description,
                       url: shareUrl,
                     }}
@@ -148,7 +149,7 @@ export default function ConversationPage({ deckId }: ConversationPageProps) {
                     size="lg"
                     className="w-full md:w-auto"
                   >
-                    Next Question
+                    {siteConfig.conversation.nextQuestion}
                   </Button>
                 </div>
               </Card>
@@ -159,11 +160,11 @@ export default function ConversationPage({ deckId }: ConversationPageProps) {
           <div className="mt-6 flex w-full items-center justify-center gap-4">
             <Button variant="outline" onClick={handleReset}>
               <RotateCw className="mr-2 h-4 w-4" />
-              Restart
+              {siteConfig.conversation.restart}
             </Button>
             <ShareButton
               shareData={{
-                title: `Let's discuss with the '${deck.title}' deck!`,
+                title: siteConfig.conversation.shareDeckInvite(deck.title),
                 text: deck.description,
                 url: shareUrl,
               }}

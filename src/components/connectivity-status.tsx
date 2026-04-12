@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { Wifi, WifiOff } from 'lucide-react';
 import { Badge } from './ui/badge';
+import { siteConfig } from '@/lib/site';
 
 export default function ConnectivityStatus() {
   const [isOnline, setIsOnline] = useState(true);
@@ -33,7 +34,7 @@ export default function ConnectivityStatus() {
       ) : (
         <WifiOff className="h-4 w-4" />
       )}
-      <span>{isOnline ? 'Online' : 'Offline'}</span>
+      <span>{isOnline ? siteConfig.status.online : siteConfig.status.offline}</span>
     </Badge>
   );
 }

@@ -3,10 +3,11 @@ import './globals.css';
 import { ThemeProvider } from '@/components/providers/theme-provider';
 import { Toaster } from '@/components/ui/toaster';
 import Header from '@/components/layout/header';
+import { siteConfig } from '@/lib/site';
 
 export const metadata: Metadata = {
-  title: 'Shuffle Talks PWA',
-  description: 'Spark meaningful conversations with card decks.',
+  title: siteConfig.name,
+  description: siteConfig.description,
   manifest: '/manifest.json',
 };
 
@@ -16,7 +17,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang={siteConfig.locale} suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link

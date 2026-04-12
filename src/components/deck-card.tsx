@@ -48,7 +48,7 @@ export default function DeckCard({ deck, imageUrl, imageHint }: DeckCardProps) {
       </CardContent>
       <CardFooter className="p-4 pt-0">
         <Button asChild className="w-full">
-          <Link href={`/decks/${deck.id}`}>Start Conversation</Link>
+          <Link href={`/decks/${deck.id}`}>Abrir tema</Link>
         </Button>
       </CardFooter>
     </Card>
