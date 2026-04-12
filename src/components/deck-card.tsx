@@ -1,3 +1,4 @@
+
 import Image from 'next/image';
 import Link from 'next/link';
 import type { Deck } from '@/lib/decks';
@@ -12,7 +13,6 @@ import {
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import FavoriteButton from './favorite-button';
-import { deckTranslations } from '@/lib/decks';
 
 interface DeckCardProps {
   deck: Deck;
@@ -21,14 +21,13 @@ interface DeckCardProps {
 }
 
 export default function DeckCard({ deck, imageUrl, imageHint }: DeckCardProps) {
-  const deckInfo = deckTranslations[deck.id] || { title: deck.id, description: '...' };
 
   return (
     <Card className="flex h-full flex-col overflow-hidden transition-shadow hover:shadow-lg">
       <CardHeader className="relative h-48 w-full p-0">
         <Image
           src={imageUrl}
-          alt={`Cover image for ${deckInfo.title}`}
+          alt={`Cover image for ${deck.title}`}
           width={600}
           height={400}
           className="h-full w-full object-cover"
@@ -42,9 +41,9 @@ export default function DeckCard({ deck, imageUrl, imageHint }: DeckCardProps) {
         <Badge variant="secondary" className="mb-2">
           {deck.category}
         </Badge>
-        <CardTitle className="text-xl font-bold font-headline">{deckInfo.title}</CardTitle>
+        <CardTitle className="text-xl font-bold font-headline">{deck.title}</CardTitle>
         <CardDescription className="mt-1 text-sm">
-          {deckInfo.description}
+          {deck.description}
         </CardDescription>
       </CardContent>
       <CardFooter className="p-4 pt-0">

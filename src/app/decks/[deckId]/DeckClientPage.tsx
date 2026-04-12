@@ -1,9 +1,10 @@
+
 'use client';
 
 import { useEffect, useState, useMemo, useCallback } from 'react';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { decks, deckTranslations, type QuestionKey } from '@/lib/decks';
+import { decks } from '@/lib/decks';
 import {
   Card,
   CardContent,
@@ -29,9 +30,8 @@ interface ConversationPageProps {
 
 export default function ConversationPage({ deckId }: ConversationPageProps) {
   const deck = useMemo(() => decks.find((d) => d.id === deckId), [deckId]);
-  const translations = useMemo(() => deckTranslations[deckId], [deckId]);
 
-  const [questionKeys, setQuestionKeys] = useState<QuestionKey[]>([]);
+  const [questionKeys, setQuestionKeys] = useState<string[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [sessionKey, setSessionKey] = useState(0);
   const [shareUrl, setShareUrl] = useState('');
@@ -42,10 +42,11 @@ export default function ConversationPage({ deckId }: ConversationPageProps) {
       setShareUrl(window.location.href);
     }
     if (deck) {
-      const initialQuestions = isShuffled
-        ? shuffleArray(deck.questionKeys)
-        : deck.questionKeys;
-      setQuestionKeys(initialQuestions);
+      const initialQuestionKeys = Object.keys(deck.questions);
+      const shuffledKeys = isShuffled
+        ? shuffleArray(initialQuestionKeys)
+        : initialQuestionKeys;
+      setQuestionKeys(shuffledKeys);
       setCurrentIndex(0);
     }
   }, [deck, sessionKey, isShuffled]);
@@ -63,14 +64,13 @@ export default function ConversationPage({ deckId }: ConversationPageProps) {
     setSessionKey((prev) => prev + 1);
   }, []);
 
-  if (!deck || !translations) {
+  if (!deck) {
     return notFound();
   }
 
   const isFinished = currentIndex >= questionKeys.length;
-  const deckTitle = translations.title;
-  const deckDescription = translations.description;
-
+  const currentQuestionKey = questionKeys[currentIndex];
+  const currentQuestion = deck.questions[currentQuestionKey];
 
   return (
     <div className="container mx-auto flex h-full max-w-2xl flex-1 flex-col items-center justify-center p-4">
@@ -128,8 +128,8 @@ export default function ConversationPage({ deckId }: ConversationPageProps) {
                   </Button>
                   <ShareButton
                     shareData={{
-                      title: `Check out the '${deckTitle}' deck!`,
-                      text: deckDescription,
+                      title: `Check out the '${deck.title}' deck!`,
+                      text: deck.description,
                       url: shareUrl,
                     }}
                   />
@@ -139,7 +139,7 @@ export default function ConversationPage({ deckId }: ConversationPageProps) {
               <Card className="relative w-full overflow-hidden shadow-xl">
                 <div className="flex min-h-[300px] flex-col items-center justify-center p-6 text-center md:min-h-[400px]">
                   <p className="font-headline text-2xl font-medium md:text-3xl">
-                    {translations.questions[questionKeys[currentIndex]]}
+                    {currentQuestion}
                   </p>
                 </div>
                 <div className="flex justify-center border-t bg-muted/50 p-4">
@@ -163,8 +163,8 @@ export default function ConversationPage({ deckId }: ConversationPageProps) {
             </Button>
             <ShareButton
               shareData={{
-                title: `Let's discuss with the '${deckTitle}' deck!`,
-                text: deckDescription,
+                title: `Let's discuss with the '${deck.title}' deck!`,
+                text: deck.description,
                 url: shareUrl,
               }}
             />
