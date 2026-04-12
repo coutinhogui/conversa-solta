@@ -3,6 +3,7 @@
 
 import { useEffect, useState, useCallback } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import type { Deck } from '@/lib/decks';
 import {
   Card,
@@ -17,6 +18,7 @@ import ShareButton from '@/components/share-button';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
+import { Badge } from '@/components/ui/badge';
 import { siteConfig } from '@/lib/site';
 
 // Helper function to shuffle an array
@@ -95,6 +97,38 @@ export default function ConversationPage({ deck }: ConversationPageProps) {
             </p>
           )}
         </div>
+
+        <Card className="mb-6 w-full overflow-hidden">
+          <div className="relative h-52 w-full">
+            <Image
+              src={deck.imageMeta?.imageUrl ?? 'https://picsum.photos/seed/1/1200/800'}
+              alt={deck.imageMeta?.imageDescription ?? deck.title}
+              fill
+              className="object-cover"
+              data-ai-hint={deck.imageMeta?.imageHint ?? 'abstract'}
+            />
+          </div>
+          <CardContent className="p-6">
+            <div className="mb-3 flex flex-wrap gap-2">
+              <Badge variant="secondary">{deck.category}</Badge>
+              {deck.taxonomy?.subcategory ? (
+                <Badge variant="outline">{deck.taxonomy.subcategory}</Badge>
+              ) : null}
+              {typeof deck.questionCount === 'number' ? (
+                <Badge variant="outline">{deck.questionCount} perguntas</Badge>
+              ) : null}
+            </div>
+            <h1 className="font-headline text-3xl font-bold">{deck.title}</h1>
+            <p className="mt-2 text-muted-foreground">{deck.description}</p>
+            <div className="mt-4 flex flex-wrap gap-2">
+              {(deck.smartTags ?? deck.tags.slice(0, 4)).map((tag) => (
+                <Badge key={tag} variant="outline" className="bg-background/80">
+                  {tag}
+                </Badge>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
 
         <AnimatePresence mode="wait">
           <motion.div

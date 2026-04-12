@@ -21,7 +21,6 @@ interface DeckCardProps {
 }
 
 export default function DeckCard({ deck, imageUrl, imageHint }: DeckCardProps) {
-
   return (
     <Card className="flex h-full flex-col overflow-hidden transition-shadow hover:shadow-lg">
       <CardHeader className="relative h-48 w-full p-0">
@@ -38,13 +37,28 @@ export default function DeckCard({ deck, imageUrl, imageHint }: DeckCardProps) {
         </div>
       </CardHeader>
       <CardContent className="flex-1 p-4">
-        <Badge variant="secondary" className="mb-2">
-          {deck.category}
-        </Badge>
+        <div className="mb-3 flex flex-wrap gap-2">
+          <Badge variant="secondary">{deck.category}</Badge>
+          {deck.taxonomy?.subcategory ? (
+            <Badge variant="outline">{deck.taxonomy.subcategory}</Badge>
+          ) : null}
+        </div>
         <CardTitle className="text-xl font-bold font-headline">{deck.title}</CardTitle>
         <CardDescription className="mt-1 text-sm">
           {deck.description}
         </CardDescription>
+        <div className="mt-4 flex flex-wrap gap-2">
+          {(deck.smartTags ?? deck.tags.slice(0, 3)).map((tag) => (
+            <Badge key={tag} variant="outline" className="bg-background/80">
+              {tag}
+            </Badge>
+          ))}
+        </div>
+        {typeof deck.questionCount === 'number' ? (
+          <p className="mt-4 text-xs uppercase tracking-[0.18em] text-muted-foreground">
+            {deck.questionCount} perguntas
+          </p>
+        ) : null}
       </CardContent>
       <CardFooter className="p-4 pt-0">
         <Button asChild className="w-full">

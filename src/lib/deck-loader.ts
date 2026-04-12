@@ -148,7 +148,12 @@ export function filterDecksByCategory(decks: Deck[], category: Deck['category'])
  * Filtra decks por tags
  */
 export function filterDecksByTags(decks: Deck[], tags: string[]): Deck[] {
-  return decks.filter(deck => tags.some(tag => deck.tags.includes(tag)));
+  const normalizedTags = tags.map((tag) => tag.toLowerCase());
+
+  return decks.filter((deck) => {
+    const searchableTags = deck.searchableTags ?? deck.tags.map((tag) => tag.toLowerCase());
+    return normalizedTags.some((tag) => searchableTags.includes(tag));
+  });
 }
 
 /**

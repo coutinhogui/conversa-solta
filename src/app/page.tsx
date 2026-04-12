@@ -9,19 +9,11 @@ import { Button } from '@/components/ui/button';
 import { loadDecks } from '@/lib/decks';
 import DeckCard from '@/components/deck-card';
 import Link from 'next/link';
-import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { siteConfig } from '@/lib/site';
 
 export default async function Home() {
   const decks = await loadDecks();
   const featuredDecks = decks.filter((deck) => deck.featured);
-
-  const getImage = (id: string) =>
-    PlaceHolderImages.find((img) => img.id === id)?.imageUrl ||
-    'https://picsum.photos/seed/1/600/400';
-
-  const getHint = (id: string) =>
-    PlaceHolderImages.find((img) => img.id === id)?.imageHint || 'abstract';
 
   return (
     <div className="container mx-auto flex flex-1 flex-col items-center justify-center p-4 text-center md:p-8">
@@ -50,8 +42,8 @@ export default async function Home() {
                 <div className="p-1">
                   <DeckCard
                     deck={deck}
-                    imageUrl={getImage(deck.image)}
-                    imageHint={getHint(deck.image)}
+                    imageUrl={deck.imageMeta?.imageUrl ?? 'https://picsum.photos/seed/1/600/400'}
+                    imageHint={deck.imageMeta?.imageHint ?? 'abstract'}
                   />
                 </div>
               </CarouselItem>
