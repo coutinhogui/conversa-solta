@@ -1,0 +1,16 @@
+{
+  "id": "team-builders",
+  "title": "Time sem script",
+  "description": "Perguntas para aproximar colegas e tirar o papo do automatico.",
+  "category": "Social",
+  "tags": ["trabalho", "time", "empresa"],
+  "questions": {
+    "q1": "Qual habilidade profissional voce esta tentando desenvolver agora?",
+    "q2": "Com quem da empresa voce trocaria de funcao por um dia?",
+    "q3": "Qual foi a licao mais importante da sua carreira ate aqui?",
+    "q4": "Como e um dia de trabalho realmente produtivo para voce?",
+    "q5": "O que poderia melhorar a colaboracao do nosso time?"
+  },
+  "featured": false,
+  "image": "deck-work"
+}

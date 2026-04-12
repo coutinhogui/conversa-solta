@@ -1,13 +1,17 @@
 'use client';
 
-import { decks } from '@/lib/decks';
+import type { Deck } from '@/lib/decks';
 import DeckCard from '@/components/deck-card';
 import { useFavorites } from '@/hooks/use-favorites';
 import { Star } from 'lucide-react';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { siteConfig } from '@/lib/site';
 
-export default function FavoritesClientPage() {
+interface FavoritesClientPageProps {
+  decks: Deck[];
+}
+
+export default function FavoritesClientPage({ decks }: FavoritesClientPageProps) {
   const { favorites, isLoaded } = useFavorites();
 
   const favoriteDecks = decks.filter((deck) => favorites.includes(deck.id));

@@ -7,17 +7,18 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { deckCategories, type Deck } from '@/lib/decks';
+import { type Deck } from '@/lib/decks';
 import DeckCard from '@/components/deck-card';
 import { type ImagePlaceholder } from '@/lib/placeholder-images';
 import { siteConfig } from '@/lib/site';
 
 interface AllDecksClientPageProps {
     decks: Deck[];
+    categories: Deck['category'][];
     images: ImagePlaceholder[];
 }
 
-export default function AllDecksClientPage({ decks, images }: AllDecksClientPageProps) {
+export default function AllDecksClientPage({ decks, categories, images }: AllDecksClientPageProps) {
   const [filter, setFilter] = useState<string>(siteConfig.decksPage.allCategories);
 
   const getImage = (id: string) =>
@@ -51,7 +52,7 @@ export default function AllDecksClientPage({ decks, images }: AllDecksClientPage
                     <SelectItem value={siteConfig.decksPage.allCategories}>
                       {siteConfig.decksPage.allCategories}
                     </SelectItem>
-                    {deckCategories.map((category) => (
+                    {categories.map((category) => (
                         <SelectItem key={category} value={category}>
                         {category}
                         </SelectItem>

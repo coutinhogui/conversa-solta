@@ -1,0 +1,16 @@
+{
+  "id": "first-date",
+  "title": "Primeiro encontro",
+  "description": "Perguntas legais para conhecer melhor a pessoa no primeiro encontro.",
+  "category": "Relacionamentos",
+  "tags": ["conhecer", "romance", "descontraído"],
+  "questions": {
+    "q1": "Qual foi a viagem mais marcante que você já fez?",
+    "q2": "Qual é a habilidade que você gostaria de desenvolver?",
+    "q3": "Como você descreveria seu tipo de humor?",
+    "q4": "Qual é seu lugar favorito para estar?",
+    "q5": "Se pudesse ter um café com qualquer pessoa (viva ou morta), quem seria?"
+  },
+  "featured": false,
+  "image": "deck-firstdate"
+}
