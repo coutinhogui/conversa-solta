@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import { ThemeProvider } from '@/components/providers/theme-provider';
 import { Toaster } from '@/components/ui/toaster';
+import Header from '@/components/layout/header';
 
 export const metadata: Metadata = {
   title: 'Shuffle Talks PWA',
@@ -31,7 +32,10 @@ export default function RootLayout({
       </head>
       <body className="font-body antialiased">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          {children}
+          <div className="flex min-h-screen w-full flex-col">
+            <Header />
+            <main className="flex flex-1 flex-col">{children}</main>
+          </div>
           <Toaster />
         </ThemeProvider>
       </body>

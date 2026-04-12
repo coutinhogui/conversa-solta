@@ -9,17 +9,15 @@ import {
   NavigationMenuList,
   navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu';
-import { useTranslations } from 'next-intl';
-import { Link } from '@/navigation';
+import Link from 'next/link';
 
 export function MainNav() {
   const pathname = usePathname();
-  const t = useTranslations('Navigation');
   const mainNav = [
-    { title: t('home'), href: '/' },
-    { title: t('decks'), href: '/decks' },
-    { title: t('favorites'), href: '/favorites' },
-    { title: t('settings'), href: '/settings' },
+    { title: 'Home', href: '/' },
+    { title: 'Decks', href: '/decks' },
+    { title: 'Favorites', href: '/favorites' },
+    { title: 'Settings', href: '/settings' },
   ];
 
   return (

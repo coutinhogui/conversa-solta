@@ -3,7 +3,6 @@
 import { Share2 } from 'lucide-react';
 import { Button } from './ui/button';
 import { useToast } from '@/hooks/use-toast';
-import { useTranslations } from 'next-intl';
 
 interface ShareButtonProps {
   shareData: {
@@ -14,7 +13,6 @@ interface ShareButtonProps {
 }
 
 export default function ShareButton({ shareData }: ShareButtonProps) {
-  const t = useTranslations('Share');
   const { toast } = useToast();
   const handleShare = async () => {
     if (navigator.share) {
@@ -28,15 +26,15 @@ export default function ShareButton({ shareData }: ShareButtonProps) {
       try {
         await navigator.clipboard.writeText(shareData.url);
         toast({
-          title: t('linkCopiedTitle'),
-          description: t('linkCopiedDescription'),
+          title: 'Link Copied!',
+          description: 'The link has been copied to your clipboard.',
         });
       } catch (error) {
         console.error('Error copying to clipboard:', error);
         toast({
           variant: 'destructive',
-          title: t('errorTitle'),
-          description: t('errorDescription'),
+          title: 'Oops!',
+          description: 'Could not copy the link.',
         });
       }
     }
@@ -45,7 +43,7 @@ export default function ShareButton({ shareData }: ShareButtonProps) {
   return (
     <Button variant="outline" onClick={handleShare}>
       <Share2 className="mr-2 h-4 w-4" />
-      {t('shareButton')}
+      Share
     </Button>
   );
 }
