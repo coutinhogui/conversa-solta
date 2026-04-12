@@ -1,0 +1,16 @@
+{
+  "id": "family-night",
+  "title": "Noite em familia",
+  "description": "Perguntas leves e divertidas para todo mundo participar.",
+  "category": "Social",
+  "tags": ["familia", "criancas", "diversao"],
+  "questions": {
+    "q1": "Qual foi a melhor parte do seu dia?",
+    "q2": "Se nossa familia fosse um time de super-herois, qual seria o nome?",
+    "q3": "Qual regra voce criaria para a nossa familia por um dia?",
+    "q4": "Qual tradicao da familia voce mais gosta?",
+    "q5": "Se pudesse planejar as ferias perfeitas em familia, para onde iriamos?"
+  },
+  "featured": false,
+  "image": "deck-family"
+}

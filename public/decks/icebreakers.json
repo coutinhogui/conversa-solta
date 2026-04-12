@@ -1,0 +1,16 @@
+{
+  "id": "icebreakers",
+  "title": "Quebra-gelo",
+  "description": "Perfeito para comecar papo com gente nova sem ficar travado.",
+  "category": "Social",
+  "tags": ["conhecer pessoas", "leve", "inicio"],
+  "questions": {
+    "q1": "Se voce pudesse ter qualquer superpoder, qual seria e por que?",
+    "q2": "Qual foi o melhor conselho que voce ja recebeu?",
+    "q3": "Qual talento escondido voce tem?",
+    "q4": "Se pudesse viajar para qualquer epoca da historia, para qual iria?",
+    "q5": "Qual musica voce sempre escolheria no karaoke?"
+  },
+  "featured": true,
+  "image": "deck-icebreakers"
+}

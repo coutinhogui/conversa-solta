@@ -1,10 +1,9 @@
 
 'use client';
 
-import { useEffect, useState, useMemo, useCallback } from 'react';
-import { notFound } from 'next/navigation';
+import { useEffect, useState, useCallback } from 'react';
 import Link from 'next/link';
-import { decks } from '@/lib/decks';
+import type { Deck } from '@/lib/decks';
 import {
   Card,
   CardContent,
@@ -26,12 +25,10 @@ const shuffleArray = <T,>(array: T[]): T[] => {
 };
 
 interface ConversationPageProps {
-  deckId: string;
+  deck: Deck;
 }
 
-export default function ConversationPage({ deckId }: ConversationPageProps) {
-  const deck = useMemo(() => decks.find((d) => d.id === deckId), [deckId]);
-
+export default function ConversationPage({ deck }: ConversationPageProps) {
   const [questionKeys, setQuestionKeys] = useState<string[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [sessionKey, setSessionKey] = useState(0);
@@ -64,10 +61,6 @@ export default function ConversationPage({ deckId }: ConversationPageProps) {
   const handleReset = useCallback(() => {
     setSessionKey((prev) => prev + 1);
   }, []);
-
-  if (!deck) {
-    return notFound();
-  }
 
   const isFinished = currentIndex >= questionKeys.length;
   const currentQuestionKey = questionKeys[currentIndex];

@@ -1,0 +1,16 @@
+{
+  "id": "deep-thoughts",
+  "title": "Papo profundo",
+  "description": "Para quando a conversa pede mais reflexao e menos superficie.",
+  "category": "Pessoal",
+  "tags": ["filosofia", "introspeccao", "reflexao"],
+  "questions": {
+    "q1": "O que significa viver uma boa vida para voce?",
+    "q2": "Felicidade e uma escolha?",
+    "q3": "Qual voce acha que e o proposito da humanidade?",
+    "q4": "Em que voce acredita e muita gente discorda?",
+    "q5": "Como voce define sucesso?"
+  },
+  "featured": true,
+  "image": "deck-deep-thoughts"
+}

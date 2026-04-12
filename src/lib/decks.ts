@@ -1,4 +1,6 @@
 
+import { deploymentBasePath } from './site';
+
 export type Deck = {
   id: string;
   title: string;
@@ -10,7 +12,10 @@ export type Deck = {
   image: string;
 };
 
-export const decks: Deck[] = [
+type DeckCategory = Deck['category'];
+
+// Fallback decks in case JSON loading fails
+const fallbackDecks: Deck[] = [
   {
     id: 'icebreakers',
     title: 'Quebra-gelo',
@@ -107,8 +112,119 @@ export const decks: Deck[] = [
   },
 ];
 
-export const deckCategories = Array.from(new Set(decks.map(d => d.category)));
+// Cache for loaded decks
+let cachedDecks: Deck[] | null = null;
 
-// This is no longer needed as titles, descriptions, and questions are in the main decks array.
-// export type QuestionKey = string;
-// export const deckTranslations: Record<string, { title: string; description: string; questions: Record<QuestionKey, string> }> = {};
+function getDecksBaseUrl(baseUrl?: string): string {
+  if (baseUrl) {
+    return baseUrl.replace(/\/$/, '');
+  }
+
+  return `${deploymentBasePath}/decks`;
+}
+
+async function loadDecksFromFilesystem(): Promise<Deck[]> {
+  const [{ readFile }, path] = await Promise.all([
+    import('node:fs/promises'),
+    import('node:path'),
+  ]);
+  const decksDir = path.join(process.cwd(), 'public', 'decks');
+  const indexPath = path.join(decksDir, 'index.json');
+  const indexContent = await readFile(indexPath, 'utf-8');
+  const deckIds = JSON.parse(indexContent) as string[];
+
+  const loadedDecks = await Promise.all(
+    deckIds.map(async (deckId) => {
+      const deckPath = path.join(decksDir, `${deckId}.json`);
+      const deckContent = await readFile(deckPath, 'utf-8');
+      return JSON.parse(deckContent) as Deck;
+    })
+  );
+
+  return loadedDecks;
+}
+
+async function loadDecksFromHttp(baseUrl?: string): Promise<Deck[]> {
+  const decksBaseUrl = getDecksBaseUrl(baseUrl);
+  const response = await fetch(`${decksBaseUrl}/index.json`, { cache: 'no-store' });
+  if (!response.ok) {
+    throw new Error(`Failed to load deck index from ${decksBaseUrl}`);
+  }
+
+  const deckIds: string[] = await response.json();
+  const deckResponses = await Promise.all(
+    deckIds.map(async (deckId) => {
+      const deckResponse = await fetch(`${decksBaseUrl}/${deckId}.json`, { cache: 'no-store' });
+      if (!deckResponse.ok) {
+        return null;
+      }
+
+      return (await deckResponse.json()) as Deck;
+    })
+  );
+
+  return deckResponses.filter((deck): deck is Deck => deck !== null);
+}
+
+/**
+ * Load decks from JSON files in /public/decks/
+ * Can be used in browser (fetch) or during build/server rendering (fs)
+ */
+export async function loadDecks(baseUrl?: string): Promise<Deck[]> {
+  if (!baseUrl && cachedDecks) {
+    return cachedDecks;
+  }
+
+  try {
+    const loadedDecks =
+      typeof window === 'undefined' && !baseUrl
+        ? await loadDecksFromFilesystem()
+        : await loadDecksFromHttp(baseUrl);
+
+    if (loadedDecks.length > 0) {
+      if (!baseUrl) {
+        cachedDecks = loadedDecks;
+      }
+      return loadedDecks;
+    }
+  } catch (error) {
+    console.warn('Failed to load decks from JSON, using fallback:', error);
+  }
+
+  // Fallback to hardcoded decks
+  if (!baseUrl) {
+    cachedDecks = fallbackDecks;
+  }
+  return fallbackDecks;
+}
+
+/**
+ * Get decks - synchronous for initial load, uses fallback
+ */
+export const decks: Deck[] = fallbackDecks;
+
+/**
+ * Get or load decks - prefer using loadDecks() in components
+ */
+export async function getDecks(): Promise<Deck[]> {
+  return loadDecks();
+}
+
+/**
+ * Get a single deck by ID
+ */
+export async function getDeckById(id: string): Promise<Deck | undefined> {
+  const allDecks = await loadDecks();
+  return allDecks.find(deck => deck.id === id);
+}
+
+/**
+ * Get all unique categories from loaded decks
+ */
+export async function getDeckCategories(): Promise<DeckCategory[]> {
+  const allDecks = await loadDecks();
+  return Array.from(new Set(allDecks.map(d => d.category)));
+}
+
+// Export categories from fallback for immediate use (non-async)
+export const deckCategories: DeckCategory[] = Array.from(new Set(fallbackDecks.map(d => d.category)));

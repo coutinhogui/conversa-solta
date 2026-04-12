@@ -6,13 +6,14 @@ import {
   CarouselPrevious,
 } from '@/components/ui/carousel';
 import { Button } from '@/components/ui/button';
-import { decks } from '@/lib/decks';
+import { loadDecks } from '@/lib/decks';
 import DeckCard from '@/components/deck-card';
 import Link from 'next/link';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { siteConfig } from '@/lib/site';
 
-export default function Home() {
+export default async function Home() {
+  const decks = await loadDecks();
   const featuredDecks = decks.filter((deck) => deck.featured);
 
   const getImage = (id: string) =>

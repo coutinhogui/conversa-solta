@@ -1,0 +1,46 @@
+name: Validate Decks
+
+on:
+  push:
+    branches: [main, develop]
+    paths:
+      - 'public/decks/**'
+      - 'validate-decks.js'
+      - '.github/workflows/validate-decks.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'public/decks/**'
+      - 'validate-decks.js'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    name: Validate all decks
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: 'npm'
+
+      - name: Validate decks
+        run: npm run validate-decks
+
+      - name: Comment PR
+        if: always() && github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const result = ${{ job.status == 'success' }} ? '✅ Decks válidos!' : '❌ Erros nos decks!';
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `${result}\n\nRun: https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`
+            });

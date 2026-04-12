@@ -1,0 +1,16 @@
+{
+  "id": "would-you-rather",
+  "title": "O que voce prefere?",
+  "description": "Escolhas absurdas, engracadas e capazes de render um papo otimo.",
+  "category": "Diversao",
+  "tags": ["festa", "engracado", "escolhas"],
+  "questions": {
+    "q1": "Voce preferiria voar ou ficar invisivel?",
+    "q2": "Voce preferiria viver sem musica ou sem filmes?",
+    "q3": "Voce preferiria saber todos os segredos do universo ou ter riqueza ilimitada?",
+    "q4": "Voce preferiria falar com animais ou dominar todas as linguas humanas?",
+    "q5": "Voce preferiria ter um chef particular ou um motorista particular?"
+  },
+  "featured": true,
+  "image": "deck-funny"
+}

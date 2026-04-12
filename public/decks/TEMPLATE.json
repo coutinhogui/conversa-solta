@@ -1,0 +1,16 @@
+{
+  "id": "seu-id-aqui",
+  "title": "Título do seu deck",
+  "description": "Descrição breve do seu deck.",
+  "category": "Social",
+  "tags": ["tag1", "tag2", "tag3"],
+  "questions": {
+    "q1": "Pergunta 1?",
+    "q2": "Pergunta 2?",
+    "q3": "Pergunta 3?",
+    "q4": "Pergunta 4?",
+    "q5": "Pergunta 5?"
+  },
+  "featured": false,
+  "image": "deck-image-name"
+}

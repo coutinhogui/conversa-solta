@@ -1,0 +1,16 @@
+{
+  "id": "for-couples",
+  "title": "Entre nos dois",
+  "description": "Perguntas para casal sair do automatico e se redescobrir.",
+  "category": "Relacionamentos",
+  "tags": ["amor", "parceria", "intimidade"],
+  "questions": {
+    "q1": "Qual memoria nossa voce gosta de revisitar?",
+    "q2": "De que maneiras voce acha que crescemos juntos?",
+    "q3": "O que eu posso fazer para voce se sentir mais amado?",
+    "q4": "Qual meta futura voce mais quer conquistar comigo?",
+    "q5": "Descreva um momento em que voce se sentiu orgulhoso de mim."
+  },
+  "featured": true,
+  "image": "deck-couples"
+}
