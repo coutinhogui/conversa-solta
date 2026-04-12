@@ -1,14 +1,14 @@
 import { NextIntlClientProvider } from 'next-intl';
-import { notFound } from 'next/navigation';
-import { unstable_setRequestLocale } from 'next-intl/server';
+import { getMessages, unstable_setRequestLocale } from 'next-intl/server';
 import Header from '@/components/layout/header';
+import { notFound } from 'next/navigation';
 
 const locales = ['en', 'pt'];
-
+ 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
 }
- 
+
 export default async function LocaleLayout({
   children,
   params: { locale },
@@ -16,18 +16,12 @@ export default async function LocaleLayout({
   children: React.ReactNode;
   params: { locale: string };
 }) {
-  // Validate that the incoming `locale` parameter is valid
-  if (!locales.includes(locale as any)) notFound();
-  
-  // Enable static rendering
-  unstable_setRequestLocale(locale);
-
-  let messages;
-  try {
-    messages = (await import(`../../../messages/${locale}.json`)).default;
-  } catch (error) {
+  if (!locales.includes(locale)) {
     notFound();
   }
+  
+  unstable_setRequestLocale(locale);
+  const messages = await getMessages();
  
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
