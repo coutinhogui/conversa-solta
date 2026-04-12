@@ -3,6 +3,10 @@ export type TranslationLanguage = {
   label: string;
 };
 
+const repositoryName = process.env.GITHUB_REPOSITORY?.split('/')[1];
+export const deploymentBasePath =
+  process.env.GITHUB_ACTIONS === 'true' && repositoryName ? `/${repositoryName}` : '';
+
 const commonLanguages: TranslationLanguage[] = [
   { code: 'pt', label: 'Portugues (original)' },
   { code: 'en', label: 'English' },
