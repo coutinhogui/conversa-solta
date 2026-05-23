@@ -1,7 +1,8 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Search } from 'lucide-react';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import {
   Select,
   SelectContent,
@@ -82,9 +83,49 @@ function groupDecks(decks: Deck[]): DeckGroup[] {
 }
 
 export default function AllDecksClientPage({ decks, categories }: AllDecksClientPageProps) {
-  const [filter, setFilter] = useState<string>(siteConfig.decksPage.allCategories);
-  const [themeFilter, setThemeFilter] = useState<string>(siteConfig.decksPage.allThemes);
-  const [query, setQuery] = useState('');
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const [filter, setFilter] = useState<string>(
+    () => searchParams.get('category') ?? siteConfig.decksPage.allCategories
+  );
+  const [themeFilter, setThemeFilter] = useState<string>(
+    () => searchParams.get('theme') ?? siteConfig.decksPage.allThemes
+  );
+  const [query, setQuery] = useState(
+    () => searchParams.get('q') ?? ''
+  );
+
+  useEffect(() => {
+    const params = new URLSearchParams(searchParams.toString());
+
+    if (query.trim()) {
+      params.set('q', query);
+    } else {
+      params.delete('q');
+    }
+
+    if (filter !== siteConfig.decksPage.allCategories) {
+      params.set('category', filter);
+    } else {
+      params.delete('category');
+    }
+
+    if (themeFilter !== siteConfig.decksPage.allThemes) {
+      params.set('theme', themeFilter);
+    } else {
+      params.delete('theme');
+    }
+
+    const currentString = searchParams.toString();
+    const newString = params.toString();
+
+    if (currentString !== newString) {
+      const url = newString ? `${pathname}?${newString}` : pathname;
+      router.replace(url, { scroll: false });
+    }
+  }, [filter, themeFilter, query, pathname, router, searchParams]);
 
   const thematicCategories = useMemo(
     () =>
